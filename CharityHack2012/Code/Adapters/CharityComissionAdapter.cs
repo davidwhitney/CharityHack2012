@@ -38,14 +38,15 @@ namespace CharityHack2012.Code.Adapters
 
             var incomeTable = doc.GetElementbyId("TablesIncome").Descendants();
 
+            var htmlNodes = incomeTable as List<HtmlNode> ?? incomeTable.ToList();
             return new CharityProfile
                 {
                     CharityName = GetAndProcessString(() => doc.GetElementbyId("ctl00_charityStatus_spnCharityName").InnerText),
                     CharityRegistrationNumber = GetAndProcessString(() => doc.GetElementbyId("ctl00_charityStatus_spnCharityNo").InnerText),
                     Income = new Income
                         {
-                            Total = incomeTable.First(x => x.InnerText == "Total").NextSibling.NextSibling.InnerText,
-                            Voluntary = incomeTable.First(x => x.InnerText == "Voluntary").NextSibling.NextSibling.InnerText,
+                            Total = htmlNodes.First(x => x.InnerText == "Total").NextSibling.NextSibling.InnerText,
+                            Voluntary = htmlNodes.First(x => x.InnerText == "Voluntary").NextSibling.NextSibling.InnerText,
                         }
                 };
 

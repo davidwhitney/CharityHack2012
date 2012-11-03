@@ -64,6 +64,9 @@
     <Reference Include="Ninject.Web.Mvc">
       <HintPath>..\packages\Ninject.MVC3.3.0.0.6\lib\net40-full\Ninject.Web.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>..\packages\RestSharp.104.1\lib\net4\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -191,6 +194,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Code\Adapters\CharityComissionAdapter.cs" />
+    <Compile Include="Code\Adapters\GuardianApiAdapter.cs" />
     <Compile Include="Code\Http\HttpContentGetter.cs" />
     <Compile Include="Code\Http\IHttpContentGetter.cs" />
     <Compile Include="Controllers\CharityController.cs" />
