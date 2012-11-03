@@ -6,16 +6,20 @@ namespace CharityHack2012.Controllers
 {
     public class CharityController : Controller
     {
-        private readonly CharityComissionAdapter _adapter;
+        private readonly CharityComissionAdapter _charityComissionAdapter;
+        private readonly GuardianApiAdapter _guardianApiAdapter;
 
-        public CharityController(CharityComissionAdapter adapter)
+        public CharityController(CharityComissionAdapter charityComissionAdapter, GuardianApiAdapter guardianApiAdapter)
         {
-            _adapter = adapter;
+            _charityComissionAdapter = charityComissionAdapter;
+            _guardianApiAdapter = guardianApiAdapter;
         }
 
         public ActionResult Index(string id)
         {
-            var charityProfile = _adapter.LoadByRegNo(id);
+            var charityProfile = _charityComissionAdapter.LoadByRegNo(id);
+            var charityNewsOnGuardian = _guardianApiAdapter.SearchContentByCharityName(charityProfile.CharityName);
+            charityProfile.NewsItems = charityNewsOnGuardian.Response.Results; 
 
             return View(charityProfile);
         }
