@@ -550,9 +550,11 @@ a:hover {
   margin-right: auto;
   margin-left: auto;
   *zoom: 1;
-  padding: 1em 40px;
-  width: 860px;
+  padding: 1em 40px 1em 60px;
+  width: 810px;
 }
+
+
 
 .navbar .container {
    background-color: #fffcb4;
