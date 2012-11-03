@@ -546,9 +546,16 @@ a:hover {
 }
 
 .container {
+  background-color: #fff;
   margin-right: auto;
   margin-left: auto;
   *zoom: 1;
+  padding: 1em 40px;
+  width: 860px;
+}
+
+.navbar .container {
+   background-color: #fffcb4;
 }
 
 .container:before,
@@ -4145,7 +4152,6 @@ input[type="submit"].btn.btn-mini {
 .navbar {
   *position: relative;
   *z-index: 2;
-  margin-bottom: 20px;
   overflow: visible;
   color: #777777;
 }
