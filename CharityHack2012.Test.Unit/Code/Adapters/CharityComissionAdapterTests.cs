@@ -27,7 +27,7 @@ namespace CharityHack2012.Test.Unit.Code.Adapters
 
             var uri = _adapter.CharityComissionUriForRegistrationNumber(RegNo);
 
-            Assert.That(uri, Is.EqualTo(_adapter.CharityComissionBaseUri + _adapter.UrlPart + RegNo));
+            Assert.That(uri, Is.EqualTo(_adapter.CharityComissionBaseUri + _adapter.TrusteesPart + RegNo));
         }
 
         [Test]
