@@ -36,12 +36,17 @@ namespace CharityHack2012.Code.Adapters
             var doc = new HtmlDocument();
             doc.LoadHtml(body);
 
+            var incomeTable = doc.GetElementbyId("TablesIncome").Descendants();
+
             return new CharityProfile
                 {
                     CharityName = GetAndProcessString(() => doc.GetElementbyId("ctl00_charityStatus_spnCharityName").InnerText),
                     CharityRegistrationNumber = GetAndProcessString(() => doc.GetElementbyId("ctl00_charityStatus_spnCharityNo").InnerText),
-                    Income = GetAndProcessString(() => doc.GetElementbyId("TablesIncome").ChildNodes[0].ChildNodes[0].InnerText),
-                    
+                    Income = new Income
+                        {
+                            Total = incomeTable.First(x => x.InnerText == "Total").NextSibling.NextSibling.InnerText,
+                            Voluntary = incomeTable.First(x => x.InnerText == "Voluntary").NextSibling.NextSibling.InnerText,
+                        }
                 };
 
         }
@@ -52,6 +57,8 @@ namespace CharityHack2012.Code.Adapters
             {
                 var @string = getString();
                 @string = @string.Trim();
+                @string = @string.Replace("&nbsp;-&nbsp;", "");
+                @string = @string.Replace("&nbsp;", "");
                 return @string.ToLower();
             }
             catch

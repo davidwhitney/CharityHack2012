@@ -5,6 +5,17 @@
         public string CharityName { get; set; }
         public string CharityRegistrationNumber { get; set; }
 
-        public string Income { get; set; }
+        public Income Income { get; set; }
+
+        public CharityProfile()
+        {
+            Income = new Income();
+        }
+    }
+
+    public class Income
+    {
+        public string Total { get; set; }
+        public string Voluntary { get; set; }
     }
 }

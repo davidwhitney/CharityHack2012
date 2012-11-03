@@ -36,6 +36,8 @@ namespace CharityHack2012.Test.Unit.Code.Adapters
             var charityProfile = _adapter.LoadByRegNo(RegNo);
 
             Assert.That(charityProfile.CharityName, Is.EqualTo("cancer research uk"));
+            Assert.That(charityProfile.CharityRegistrationNumber, Is.EqualTo("1089464"));
+            Assert.That(charityProfile.Income.Total, Is.EqualTo("492,627,000"));
         }
     }
 }
