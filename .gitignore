@@ -7,3 +7,4 @@
 /CharityHack2012.Test.Unit/*.user
 /_ReSharper.CharityHack2012
 /CharityHack2012/CharityHack2012.csproj.user
+*.user

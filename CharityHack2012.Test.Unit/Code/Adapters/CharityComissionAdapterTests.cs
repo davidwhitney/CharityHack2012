@@ -7,6 +7,7 @@ namespace CharityHack2012.Test.Unit.Code.Adapters
     public class CharityComissionAdapterTests
     {
         private CharityComissionAdapter _adapter;
+        const string RegNo = "12345";
 
         [SetUp]
         public void SetUp()
@@ -17,11 +18,16 @@ namespace CharityHack2012.Test.Unit.Code.Adapters
         [Test]
         public void CharityComissionUriForRegistrationNumber_WhenProvidedWithARegNo_GeneratesAppropriateUrl()
         {
-            const string regNo = "12345";
 
-            var uri = _adapter.CharityComissionUriForRegistrationNumber(regNo);
+            var uri = _adapter.CharityComissionUriForRegistrationNumber(RegNo);
 
-            Assert.That(uri, Is.EqualTo(_adapter.CharityComissionBaseUri + _adapter.UrlPart + regNo));
+            Assert.That(uri, Is.EqualTo(_adapter.CharityComissionBaseUri + _adapter.UrlPart + RegNo));
+        }
+
+        [Test]
+        public void LoadByRegNo_WhenCalledWithRegNumber_ScapesPageAndReturnsDtoOfData()
+        {
+            _adapter.LoadByRegNo(RegNo);
         }
     }
 }

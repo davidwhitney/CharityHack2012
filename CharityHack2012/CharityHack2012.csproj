@@ -191,6 +191,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Code\Adapters\CharityComissionAdapter.cs" />
+    <Compile Include="Code\Http\HttpContentGetter.cs" />
+    <Compile Include="Code\Http\IHttpContentGetter.cs" />
     <Compile Include="Controllers\CharityController.cs" />
     <Compile Include="CassetteConfiguration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
