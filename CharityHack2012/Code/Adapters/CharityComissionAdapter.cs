@@ -38,16 +38,26 @@ namespace CharityHack2012.Code.Adapters
 
             return new CharityProfile
                 {
-                    CharityName = GetAndProcessString(() => doc.GetElementbyId("ctl00_charityStatus_spnCharityName").InnerText)
+                    CharityName = GetAndProcessString(() => doc.GetElementbyId("ctl00_charityStatus_spnCharityName").InnerText),
+                    CharityRegistrationNumber = GetAndProcessString(() => doc.GetElementbyId("ctl00_charityStatus_spnCharityNo").InnerText),
+                    Income = GetAndProcessString(() => doc.GetElementbyId("TablesIncome").ChildNodes[0].ChildNodes[0].InnerText),
+                    
                 };
 
         }
 
         public string GetAndProcessString(Func<string> getString)
         {
-            var @string = getString();
-            @string = @string.Trim();
-            return @string;
+            try
+            {
+                var @string = getString();
+                @string = @string.Trim();
+                return @string.ToLower();
+            }
+            catch
+            {
+                return string.Empty;
+            }
         }
     }
 }

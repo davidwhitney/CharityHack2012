@@ -33,7 +33,9 @@ namespace CharityHack2012.Test.Unit.Code.Adapters
         [Test]
         public void LoadByRegNo_WhenCalledWithRegNumber_ScapesPageAndReturnsDtoOfData()
         {
-            _adapter.LoadByRegNo(RegNo);
+            var charityProfile = _adapter.LoadByRegNo(RegNo);
+
+            Assert.That(charityProfile.CharityName, Is.EqualTo("cancer research uk"));
         }
     }
 }
