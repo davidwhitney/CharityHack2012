@@ -45,6 +45,8 @@ namespace CharityHack2012.Code.Adapters
                 {
                     CharityName = GetAndProcessString(() => doc.GetElementbyId("ctl00_charityStatus_spnCharityName").InnerText),
                     CharityRegistrationNumber = GetAndProcessString(() => doc.GetElementbyId("ctl00_charityStatus_spnCharityNo").InnerText),
+                    MissionStatement = GetAndProcessString(() => doc.GetElementbyId("ctl00_MainContent_ucDisplay_ucActivities_ucTextAreaInput_txtTextEntry").InnerText),
+                    
                     Income = new Income
                         {
                             Total = incomeTable.First(x => x.InnerText == "Total").NextSibling.NextSibling.InnerText,
@@ -55,6 +57,7 @@ namespace CharityHack2012.Code.Adapters
                             Other = incomeTable.First(x => x.InnerText == "Other").NextSibling.NextSibling.InnerText,
                             InvestmentGains = incomeTable.First(x => x.InnerText == "Investment gains").NextSibling.NextSibling.InnerText,
                         },
+
                     Expenditure = new Expenditure
                         {
                             GeneratingVoluntaryIncome = spendingTable.First(x => x.InnerText == "Generating voluntary income").NextSibling.NextSibling.InnerText,
@@ -65,6 +68,7 @@ namespace CharityHack2012.Code.Adapters
                             Other = spendingTable.First(x => x.InnerText == "Other").NextSibling.NextSibling.InnerText,
                             Total = spendingTable.First(x => x.InnerText == "Total").NextSibling.NextSibling.InnerText,
                         },
+
                     AssetsLiabilitiesAndPeople = new AssetsLiabilitiesAndPeople
                         {
                             OwnUseAssets = assetsLiabilitiesAndPeople.First(x => x.InnerText == "Own use assets").NextSibling.NextSibling.InnerText,
@@ -74,6 +78,7 @@ namespace CharityHack2012.Code.Adapters
                             Employees = assetsLiabilitiesAndPeople.First(x => x.InnerText == "Employees").NextSibling.NextSibling.InnerText,
                             Volunteers = assetsLiabilitiesAndPeople.First(x => x.InnerText == "Volunteers").NextSibling.NextSibling.InnerText,
                         },
+
                     CharitableSpending = new CharitableSpending
                         {
                             IncomeGenerationAndGovernance = charitableSpending.First(x => x.InnerText == "Income generation and governance").NextSibling.NextSibling.InnerText,

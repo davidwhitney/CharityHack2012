@@ -37,6 +37,7 @@ namespace CharityHack2012.Test.Unit.Code.Adapters
 
             Assert.That(charityProfile.CharityName, Is.EqualTo("cancer research uk"));
             Assert.That(charityProfile.CharityRegistrationNumber, Is.EqualTo("1089464"));
+            Assert.That(charityProfile.MissionStatement, Is.EqualTo("TO PROTECT AND PROMOTE THE HEALTH OF THE PUBLIC IN PARTICULAR BY RESEARCH INTO THE NATURE, CAUSES, DIAGNOSIS, PREVENTION, TREATMENT AND CURE OF ALL FORMS OF CANCER, INCLUDING THE DEVELOPMENT OF RESEARCH INTO PRACTICAL APPLICATIONS FOR THE PREVENTION, TREATMENT AND CURE OF CANCER AND TO PROVIDE INFORMATION AND RAISE PUBLIC UNDERSTANDING OF SUCH MATTERS.".ToLower()));
             Assert.That(charityProfile.Income.Total, Is.EqualTo("492,627,000"));
             Assert.That(charityProfile.Income.Voluntary, Is.EqualTo("350,080,000"));
             Assert.That(charityProfile.Income.TradingToRaiseFunds, Is.EqualTo("82,071,000"));
