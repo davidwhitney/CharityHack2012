@@ -3,4 +3,12 @@
     ViewBag.Title = "Home Page";
 }
 
-@Model.CharityName
+
+<div id='info'>
+  <h1>@Model.CharityName</h1>
+  <p><img src='@Model.CharityImage'>@Model.CharitySummary</p>
+</div>
+
+<div id="actions">
+  <a href="">Donate</a>
+</div>
