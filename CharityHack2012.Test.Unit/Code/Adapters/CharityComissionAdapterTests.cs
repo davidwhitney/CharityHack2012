@@ -1,4 +1,7 @@
-﻿using CharityHack2012.Code.Adapters;
+﻿using System.IO;
+using CharityHack2012.Code.Adapters;
+using CharityHack2012.Code.Http;
+using Moq;
 using NUnit.Framework;
 
 namespace CharityHack2012.Test.Unit.Code.Adapters
@@ -7,12 +10,15 @@ namespace CharityHack2012.Test.Unit.Code.Adapters
     public class CharityComissionAdapterTests
     {
         private CharityComissionAdapter _adapter;
+        private Mock<IHttpContentGetter> _httpGetter;
         const string RegNo = "12345";
 
         [SetUp]
         public void SetUp()
         {
-            _adapter = new CharityComissionAdapter();
+            _httpGetter = new Mock<IHttpContentGetter>();
+            _httpGetter.Setup(x => x.Get(It.IsAny<string>())).Returns(File.ReadAllText("cruk.html"));
+            _adapter = new CharityComissionAdapter(_httpGetter.Object);
         }
 
         [Test]

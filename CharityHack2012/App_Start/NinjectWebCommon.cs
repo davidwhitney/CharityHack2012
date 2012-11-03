@@ -1,3 +1,5 @@
+using CharityHack2012.Code.Http;
+
 [assembly: WebActivator.PreApplicationStartMethod(typeof(CharityHack2012.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivator.ApplicationShutdownMethodAttribute(typeof(CharityHack2012.App_Start.NinjectWebCommon), "Stop")]
 
@@ -42,6 +44,8 @@ namespace CharityHack2012.App_Start
             var kernel = new StandardKernel();
             kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
             kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
+            
+            kernel.Bind<IHttpContentGetter>().To<HttpContentGetter>();
             
             RegisterServices(kernel);
             return kernel;
