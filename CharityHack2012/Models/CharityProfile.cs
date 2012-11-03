@@ -21,5 +21,6 @@
         public string Investment { get; set; }
         public string CharitableActivities { get; set; }
         public string Other { get; set; }
+        public string InvestmentGains { get; set; }
     }
 }

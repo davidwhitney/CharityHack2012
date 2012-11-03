@@ -50,6 +50,7 @@ namespace CharityHack2012.Code.Adapters
                             Investment = incomeTable.First(x => x.InnerText == "Investment").NextSibling.NextSibling.InnerText,
                             CharitableActivities = incomeTable.First(x => x.InnerText == "Charitable activities").NextSibling.NextSibling.InnerText,
                             Other = incomeTable.First(x => x.InnerText == "Other").NextSibling.NextSibling.InnerText,
+                            InvestmentGains = incomeTable.First(x => x.InnerText == "Investment gains").NextSibling.NextSibling.InnerText,
                         }
                 };
 
