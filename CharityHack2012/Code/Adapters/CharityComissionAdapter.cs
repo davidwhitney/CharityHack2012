@@ -47,6 +47,8 @@ namespace CharityHack2012.Code.Adapters
             var assetsLiabilitiesAndPeople = generalDataDoc.GetElementbyId("TablesAssetsLiabilitiesAndPeople").Descendants();
             var charitableSpending = generalDataDoc.GetElementbyId("TablesCharitableSpending").Descendants();
 
+            //var col = trusteeDataDoc.DocumentNode.ChildNodes.Where(x => x.Attributes.Contains("ScrollingSelectionLeftColumn"));
+
             return new CharityProfile
                 {
                     CharityName = GetAndProcessString(() => generalDataDoc.GetElementbyId("ctl00_charityStatus_spnCharityName").InnerText),
