@@ -2,3 +2,5 @@
 /CharityHack2012/obj
 /*.suo
 /_ReSharper.CharityHack2012
+/CharityHack2012.Test.Unit/bin
+/CharityHack2012.Test.Unit/obj
