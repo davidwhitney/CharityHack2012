@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using RestSharp;
 
 namespace CharityHack2012.Code.Adapters
@@ -14,12 +12,23 @@ namespace CharityHack2012.Code.Adapters
         public GuardianEnvelope SearchContentByCharityName(string charityName)
         {
             var restClient = new RestClient("http://content.guardianapis.com");
-            var request = new RestRequest("search?q={charityName}&page-size={pageSize}&format=json&show-fields=all&api-key={apiKey}", Method.GET);
+            var startOfLastWeek = DateTime.Now.StartOfLastWeek();
+            var request = new RestRequest("search?q={charityName}&page-size={pageSize}&from-date={fromDate}&to-date={toDate}&format=json&show-fields=all&api-key={apiKey}", Method.GET);
             request.AddUrlSegment("charityName", string.Format("\"{0}\"", charityName));
+            request.AddUrlSegment("fromDate", startOfLastWeek.ToString("yyyy-MM-dd"));
+            request.AddUrlSegment("toDate", startOfLastWeek.AddDays(6).ToString("yyyy-MM-dd"));
             request.AddUrlSegment("pageSize", "50");
             request.AddUrlSegment("apiKey", "cb7544ye6y758hp8fks5p4ke");
-
             return restClient.Execute<GuardianEnvelope>(request).Data;
+        }
+    }
+
+    public static class DateTimeExtensions
+    {
+        public static DateTime StartOfLastWeek(this DateTime date)
+        {
+            var daysFromMonThisWeek = date.DayOfWeek - DayOfWeek.Monday + 7;
+            return date.AddDays(-1 * daysFromMonThisWeek);
         }
     }
 

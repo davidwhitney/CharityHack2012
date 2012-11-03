@@ -1,6 +1,5 @@
 using System.Web.Mvc;
 using CharityHack2012.Code.Adapters;
-using CharityHack2012.Models;
 using JustGiving.Api.Sdk;
 using System.Linq;
 
@@ -8,18 +7,22 @@ namespace CharityHack2012.Controllers
 {
     public class CharityController : Controller
     {
-        private readonly CharityComissionAdapter _adapter;
+        private readonly CharityComissionAdapter _charityComissionAdapter;
+        private readonly GuardianApiAdapter _guardianApiAdapter;
         private readonly IJustGivingClient _jgClient;
 
-        public CharityController(CharityComissionAdapter adapter, IJustGivingClient jgClient)
+        public CharityController(CharityComissionAdapter charityComissionAdapter, GuardianApiAdapter guardianApiAdapter, IJustGivingClient jgClient)
         {
-            _adapter = adapter;
+            _charityComissionAdapter = charityComissionAdapter;
+            _guardianApiAdapter = guardianApiAdapter;
             _jgClient = jgClient;
         }
 
         public ActionResult Index(string id)
         {
-            var charityProfile = _adapter.LoadByRegNo(id);
+            var charityProfile = _charityComissionAdapter.LoadByRegNo(id);
+            var charityNewsOnGuardian = _guardianApiAdapter.SearchContentByCharityName(charityProfile.CharityName);
+            charityProfile.NewsItems = charityNewsOnGuardian.Response.Results; 
 
             var vaguelyMatchingCharities = _jgClient.Search.CharitySearch(id);
             var thisCharity =
