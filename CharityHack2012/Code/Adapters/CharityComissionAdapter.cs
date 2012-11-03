@@ -38,6 +38,7 @@ namespace CharityHack2012.Code.Adapters
 
             var incomeTable = doc.GetElementbyId("TablesIncome").Descendants();
             var spendingTable = doc.GetElementbyId("TablesSpending").Descendants();
+            var assetsLiabilitiesAndPeople = doc.GetElementbyId("TablesAssetsLiabilitiesAndPeople").Descendants();
 
             return new CharityProfile
                 {
@@ -62,9 +63,15 @@ namespace CharityHack2012.Code.Adapters
                             CharitableActivities = spendingTable.First(x => x.InnerText == "Charitable activities").NextSibling.NextSibling.InnerText,
                             Other = spendingTable.First(x => x.InnerText == "Other").NextSibling.NextSibling.InnerText,
                             Total = spendingTable.First(x => x.InnerText == "Total").NextSibling.NextSibling.InnerText,
+                        },
+                    AssetsLiabilitiesAndPeople = new AssetsLiabilitiesAndPeople
+                        {
+                            OwnUseAssets = assetsLiabilitiesAndPeople.First(x => x.InnerText == "Own use assets").NextSibling.NextSibling.InnerText,
+                            LongTermInvestments = assetsLiabilitiesAndPeople.First(x => x.InnerText == "Long term investments").NextSibling.NextSibling.InnerText,
+                            OtherAssets = assetsLiabilitiesAndPeople.First(x => x.InnerText == "Other assets").NextSibling.NextSibling.InnerText,
+                            TotalLiabilities = assetsLiabilitiesAndPeople.First(x => x.InnerText == "Total liabilities").NextSibling.NextSibling.InnerText,
                         }
                 };
-
         }
 
         public string GetAndProcessString(Func<string> getString)
