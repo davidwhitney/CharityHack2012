@@ -17,7 +17,8 @@ namespace CharityHack2012.Test.Unit.Code.Adapters
         public void SetUp()
         {
             _httpGetter = new Mock<IHttpContentGetter>();
-            _httpGetter.Setup(x => x.Get(It.IsAny<string>())).Returns(File.ReadAllText("cruk.html"));
+            _httpGetter.Setup(x => x.Get(It.Is<string>(y => y.Contains("CharityWithPartB")))).Returns(File.ReadAllText("cruk.html"));
+            _httpGetter.Setup(x => x.Get(It.Is<string>(y => y.Contains("ContactAndTrustees")))).Returns(File.ReadAllText("cruk2.html"));
             _adapter = new CharityComissionAdapter(_httpGetter.Object);
         }
 

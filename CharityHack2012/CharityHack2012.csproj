@@ -54,7 +54,19 @@
     <Reference Include="HtmlAgilityPack">
       <HintPath>..\packages\HtmlAgilityPack.1.4.6\lib\Net40\HtmlAgilityPack.dll</HintPath>
     </Reference>
+    <Reference Include="JustGiving.Api.Data.Sdk">
+      <HintPath>..\packages\justgiving-sdk.1.6.1\lib\Net35\JustGiving.Api.Data.Sdk.dll</HintPath>
+    </Reference>
+    <Reference Include="JustGiving.Api.Sdk">
+      <HintPath>..\packages\justgiving-sdk.1.6.1\lib\Net35\JustGiving.Api.Sdk.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Http">
+      <HintPath>..\packages\justgiving-sdk.1.6.1\lib\Net35\Microsoft.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Http.Extensions">
+      <HintPath>..\packages\justgiving-sdk.1.6.1\lib\Net35\Microsoft.Http.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.0.1.10\lib\net40\Ninject.dll</HintPath>
     </Reference>
@@ -210,6 +222,7 @@
     <Content Include="App_Data\ContentCache\init.txt" />
     <Content Include="Content\css\bootstrap-responsive.css" />
     <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\img\charity-logo-default.png" />
     <Content Include="Content\img\glyphicons-halflings-white.png" />
     <Content Include="Content\img\glyphicons-halflings.png" />
     <Content Include="Content\img\logo-small.png" />

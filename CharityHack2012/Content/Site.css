@@ -33,9 +33,23 @@
   margin-top: 5px;
 }
 
+.navbar,
+.navbar * {
+  margin-bottom: 0;
+}
+
+div, ul {
+  margin-bottom: 2em;
+}
+
 h1, h2, h3 {
   font-family: 'Open Sans', sans-serif;
   font-size: 100%;
+}
+
+h2 {
+  line-height: 100%;
+
 }
 
 article {
@@ -127,3 +141,6 @@ footer {
   padding: 20px 26px;
 }
 
+#monies {
+  clear: both;
+}
