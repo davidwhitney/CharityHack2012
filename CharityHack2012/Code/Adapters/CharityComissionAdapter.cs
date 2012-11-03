@@ -39,8 +39,11 @@ namespace CharityHack2012.Code.Adapters
             var generalDataDoc = new HtmlDocument();
             generalDataDoc.LoadHtml(_httpGet.Get(CharityComissionUriForRegistrationNumber(regNo)));
 
+            var trusteeUri = CharityComissionUriForTrustees(regNo);
             var trusteeDataDoc = new HtmlDocument();
-            trusteeDataDoc.LoadHtml(_httpGet.Get(CharityComissionUriForTrustees(regNo)));
+            var trusteeRaw = _httpGet.Get(trusteeUri);
+            trusteeRaw = trusteeRaw.Replace("class=\"ScrollingSelectionLeftColumn\"", "id=\"trusteeDataDoc\" class=\"ScrollingSelectionLeftColumn\"");
+            trusteeDataDoc.LoadHtml(trusteeRaw);
 
             var incomeTable = generalDataDoc.GetElementbyId("TablesIncome").Descendants();
             var spendingTable = generalDataDoc.GetElementbyId("TablesSpending").Descendants();
@@ -48,14 +51,16 @@ namespace CharityHack2012.Code.Adapters
             var charitableSpending = generalDataDoc.GetElementbyId("TablesCharitableSpending").Descendants();
 
             var htmlNodes = incomeTable as List<HtmlNode> ?? incomeTable.ToList();
-            //var col = trusteeDataDoc.DocumentNode.ChildNodes.Where(x => x.Attributes.Contains("ScrollingSelectionLeftColumn"));
+            var trusteeNodes = trusteeDataDoc.DocumentNode.Descendants().Where(x => x.Name == "a" && x.Id.Contains("ctl00_MainContent_")).ToList();
+            var trusteeNames = trusteeNodes.Select(trustee => trustee.InnerText).ToList();
 
             return new CharityProfile
                 {
                     CharityName = GetAndProcessString(() => generalDataDoc.GetElementbyId("ctl00_charityStatus_spnCharityName").InnerText),
                     CharityRegistrationNumber = GetAndProcessString(() => generalDataDoc.GetElementbyId("ctl00_charityStatus_spnCharityNo").InnerText),
                     MissionStatement = GetAndProcessString(() => generalDataDoc.GetElementbyId("ctl00_MainContent_ucDisplay_ucActivities_ucTextAreaInput_txtTextEntry").InnerText),
-                    
+                    TrusteeNames = trusteeNames,
+
                     Income = new Income
                         {
                             Total = htmlNodes.First(x => x.InnerText == "Total").NextSibling.NextSibling.InnerText,
