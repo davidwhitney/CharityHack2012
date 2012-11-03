@@ -57,6 +57,8 @@ namespace CharityHack2012.Test.Unit.Code.Adapters
             Assert.That(charityProfile.AssetsLiabilitiesAndPeople.TotalLiabilities, Is.EqualTo("-271,759,000"));
             Assert.That(charityProfile.AssetsLiabilitiesAndPeople.Employees, Is.EqualTo("3,968"));
             Assert.That(charityProfile.AssetsLiabilitiesAndPeople.Volunteers, Is.EqualTo("40,000"));
+            Assert.That(charityProfile.CharitableSpending.IncomeGenerationAndGovernance, Is.EqualTo("150,373,000"));
+            Assert.That(charityProfile.CharitableSpending.CharitableSpendingTotal, Is.EqualTo("347,877,000"));
 
         }
     }

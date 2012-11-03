@@ -54,5 +54,7 @@
 
     public class CharitableSpending
     {
+        public string IncomeGenerationAndGovernance { get; set; }
+        public string CharitableSpendingTotal { get; set; }
     }
 }

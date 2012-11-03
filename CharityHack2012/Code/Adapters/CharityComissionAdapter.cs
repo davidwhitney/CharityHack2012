@@ -76,7 +76,8 @@ namespace CharityHack2012.Code.Adapters
                         },
                     CharitableSpending = new CharitableSpending
                         {
-                                
+                            IncomeGenerationAndGovernance = charitableSpending.First(x => x.InnerText == "Income generation and governance").NextSibling.NextSibling.InnerText,
+                            CharitableSpendingTotal = charitableSpending.First(x => x.InnerText == "Charitable spending").NextSibling.NextSibling.InnerText,
                         }
                 };
         }
