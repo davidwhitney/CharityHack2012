@@ -39,6 +39,7 @@ namespace CharityHack2012.Code.Adapters
             var incomeTable = doc.GetElementbyId("TablesIncome").Descendants();
             var spendingTable = doc.GetElementbyId("TablesSpending").Descendants();
             var assetsLiabilitiesAndPeople = doc.GetElementbyId("TablesAssetsLiabilitiesAndPeople").Descendants();
+            var charitableSpending = doc.GetElementbyId("TablesCharitableSpending").Descendants();
 
             return new CharityProfile
                 {
@@ -72,6 +73,10 @@ namespace CharityHack2012.Code.Adapters
                             TotalLiabilities = assetsLiabilitiesAndPeople.First(x => x.InnerText == "Total liabilities").NextSibling.NextSibling.InnerText,
                             Employees = assetsLiabilitiesAndPeople.First(x => x.InnerText == "Employees").NextSibling.NextSibling.InnerText,
                             Volunteers = assetsLiabilitiesAndPeople.First(x => x.InnerText == "Volunteers").NextSibling.NextSibling.InnerText,
+                        },
+                    CharitableSpending = new CharitableSpending
+                        {
+                                
                         }
                 };
         }
