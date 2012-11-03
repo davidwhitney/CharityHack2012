@@ -6,6 +6,7 @@
         public string CharityRegistrationNumber { get; set; }
 
         public Income Income { get; set; }
+        public Expenditure Expenditure { get; set; }
 
         public CharityProfile()
         {
@@ -22,5 +23,11 @@
         public string CharitableActivities { get; set; }
         public string Other { get; set; }
         public string InvestmentGains { get; set; }
+    }
+    
+    public class Expenditure
+    {
+        public string GeneratingVoluntaryIncome { get; set; }
+        public string Governance { get; set; }
     }
 }
