@@ -1,4 +1,7 @@
-﻿.navbar.navbar-fixed-top .brand {
+﻿body {
+  background: #fffcb4;
+}
+.navbar.navbar-fixed-top .brand {
   background-image: url(/content/img/logo-small.png);
   background-repeat: no-repeat;
   background-position: 0 0;
