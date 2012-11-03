@@ -47,5 +47,7 @@
         public string LongTermInvestments { get; set; }
         public string OtherAssets { get; set; }
         public string TotalLiabilities { get; set; }
+        public string Employees { get; set; }
+        public string Volunteers { get; set; }
     }
 }
