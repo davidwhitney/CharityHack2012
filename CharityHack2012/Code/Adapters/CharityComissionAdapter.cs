@@ -47,6 +47,7 @@ namespace CharityHack2012.Code.Adapters
             var assetsLiabilitiesAndPeople = generalDataDoc.GetElementbyId("TablesAssetsLiabilitiesAndPeople").Descendants();
             var charitableSpending = generalDataDoc.GetElementbyId("TablesCharitableSpending").Descendants();
 
+            var htmlNodes = incomeTable as List<HtmlNode> ?? incomeTable.ToList();
             //var col = trusteeDataDoc.DocumentNode.ChildNodes.Where(x => x.Attributes.Contains("ScrollingSelectionLeftColumn"));
 
             return new CharityProfile
@@ -57,8 +58,8 @@ namespace CharityHack2012.Code.Adapters
                     
                     Income = new Income
                         {
-                            Total = incomeTable.First(x => x.InnerText == "Total").NextSibling.NextSibling.InnerText,
-                            Voluntary = incomeTable.First(x => x.InnerText == "Voluntary").NextSibling.NextSibling.InnerText,
+                            Total = htmlNodes.First(x => x.InnerText == "Total").NextSibling.NextSibling.InnerText,
+                            Voluntary = htmlNodes.First(x => x.InnerText == "Voluntary").NextSibling.NextSibling.InnerText,
                             TradingToRaiseFunds = incomeTable.First(x => x.InnerText == "Trading to raise funds").NextSibling.NextSibling.InnerText,
                             Investment = incomeTable.First(x => x.InnerText == "Investment").NextSibling.NextSibling.InnerText,
                             CharitableActivities = incomeTable.First(x => x.InnerText == "Charitable activities").NextSibling.NextSibling.InnerText,
