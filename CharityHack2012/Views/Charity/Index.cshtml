@@ -14,31 +14,46 @@
 </div>
 
 <div id="monies">
-  <h2>Income</h2>
-  <ul>
-    <li><strong>Total:</strong> @Model.Income.Total</li>
-    <li><strong>Investment gains:</strong> @Model.Income.InvestmentGains</li>
-    <li><strong>Investment:</strong> @Model.Income.Investment</li>
-    <li><strong>Trading to raise funds:</strong> @Model.Income.TradingToRaiseFunds</li>
-    <li><strong>Voluntary:</strong> @Model.Income.Voluntary</li>
-    <li><strong>Other:</strong> @Model.Income.Other</li>
-  </ul>
+    <h2>Income</h2>
+    <ul>
+        <li><strong>Total:</strong> @Model.Income.Total</li>
+        <li><strong>Investment gains:</strong> @Model.Income.InvestmentGains</li>
+        <li><strong>Investment:</strong> @Model.Income.Investment</li>
+        <li><strong>Trading to raise funds:</strong> @Model.Income.TradingToRaiseFunds</li>
+        <li><strong>Voluntary:</strong> @Model.Income.Voluntary</li>
+        <li><strong>Other:</strong> @Model.Income.Other</li>
+    </ul>
 
-  <h2>Expences</h2>
-  <ul>
-    <li><strong>Total:</strong> @Model.Expenditure.Total</li>
-    <li><strong>Charitable activities:</strong> @Model.Expenditure.CharitableActivities</li>
-    <li><strong>Investment management:</strong> @Model.Expenditure.InvestmentManagement</li>
-    <li><strong>Spent raising more money:</strong> @Model.Expenditure.TradingToRaiseFunds</li>
-  </ul>
+    <h2>Expenses</h2>
+    <ul>
+        <li><strong>Total:</strong> @Model.Expenditure.Total</li>
+        <li><strong>Charitable activities:</strong> @Model.Expenditure.CharitableActivities</li>
+        <li><strong>Investment management:</strong> @Model.Expenditure.InvestmentManagement</li>
+        <li><strong>Spent raising more money:</strong> @Model.Expenditure.TradingToRaiseFunds</li>
+    </ul>
 
-  <h2>Assets liabilities and People</h2>
-  <li><strong>OwnUseAssets:</strong> @Model.AssetsLiabilitiesAndPeople.OwnUseAssets</li>
-  <li><strong>LongTermInvestments:</strong> @Model.AssetsLiabilitiesAndPeople.LongTermInvestments</li>
-  <li><strong>OtherAssets:</strong> @Model.AssetsLiabilitiesAndPeople.OtherAssets</li>
-  <li><strong>TotalLiabilities:</strong> @Model.AssetsLiabilitiesAndPeople.TotalLiabilities</li>
-  <li><strong>Employees:</strong> @Model.AssetsLiabilitiesAndPeople.Employees</li>
-  <li><strong>Volunteers:</strong> @Model.AssetsLiabilitiesAndPeople.Volunteers</li>
+    <h2>Assets liabilities and People</h2>
+    <ul>
+    <li><strong>OwnUseAssets:</strong> @Model.AssetsLiabilitiesAndPeople.OwnUseAssets</li>
+    <li><strong>LongTermInvestments:</strong> @Model.AssetsLiabilitiesAndPeople.LongTermInvestments</li>
+    <li><strong>OtherAssets:</strong> @Model.AssetsLiabilitiesAndPeople.OtherAssets</li>
+    <li><strong>TotalLiabilities:</strong> @Model.AssetsLiabilitiesAndPeople.TotalLiabilities</li>
+    <li><strong>Employees:</strong> @Model.AssetsLiabilitiesAndPeople.Employees</li>
+    <li><strong>Volunteers:</strong> @Model.AssetsLiabilitiesAndPeople.Volunteers</li>
+    </ul>
 
 
+</div>
+
+<div>
+    @foreach(var newsItem in Model.NewsItems)
+    {
+        <div>
+            <a href="@newsItem.WebUrl">@newsItem.WebTitle</a><p />
+            @{
+                var publicationDate = Convert.ToDateTime(newsItem.WebPublicationDate);
+            }
+            @publicationDate.ToString("dd MMM yyyy HH:mm")
+        </div>    
+    }
 </div>
