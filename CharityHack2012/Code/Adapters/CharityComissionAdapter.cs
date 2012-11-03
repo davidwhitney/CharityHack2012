@@ -16,7 +16,8 @@ namespace CharityHack2012.Code.Adapters
         private readonly IHttpContentGetter _httpGet;
 
         public string CharityComissionBaseUri { get { return "http://www.charity-commission.gov.uk"; } }
-        public string UrlPart { get { return "/Showcharity/RegisterOfCharities/CharityWithPartB.aspx?SubsidiaryNumber=0&RegisteredCharityNumber=";; } }
+        public string GeneralInfoPart { get { return "/Showcharity/RegisterOfCharities/CharityWithPartB.aspx?SubsidiaryNumber=0&RegisteredCharityNumber=";; } }
+        public string TrusteesPart { get { return "/Showcharity/RegisterOfCharities/ContactAndTrustees.aspx?SubsidiaryNumber=0&RegisteredCharityNumber="; ; } }
 
         public CharityComissionAdapter(IHttpContentGetter httpGet)
         {
@@ -25,28 +26,33 @@ namespace CharityHack2012.Code.Adapters
 
         public string CharityComissionUriForRegistrationNumber(string registrationNumber)
         {
-            return CharityComissionBaseUri + UrlPart + registrationNumber;
+            return CharityComissionBaseUri + GeneralInfoPart + registrationNumber;
+        }
+
+        public string CharityComissionUriForTrustees(string registrationNumber)
+        {
+            return CharityComissionBaseUri + TrusteesPart + registrationNumber;
         }
         
         public CharityProfile LoadByRegNo(string regNo)
         {
-            var uri = CharityComissionUriForRegistrationNumber(regNo);
-            var body = _httpGet.Get(uri);
+            var generalDataDoc = new HtmlDocument();
+            generalDataDoc.LoadHtml(_httpGet.Get(CharityComissionUriForRegistrationNumber(regNo)));
 
-            var doc = new HtmlDocument();
-            doc.LoadHtml(body);
+            var trusteeDataDoc = new HtmlDocument();
+            trusteeDataDoc.LoadHtml(_httpGet.Get(CharityComissionUriForTrustees(regNo)));
 
-            var incomeTable = doc.GetElementbyId("TablesIncome").Descendants();
-            var spendingTable = doc.GetElementbyId("TablesSpending").Descendants();
-            var assetsLiabilitiesAndPeople = doc.GetElementbyId("TablesAssetsLiabilitiesAndPeople").Descendants();
-            var charitableSpending = doc.GetElementbyId("TablesCharitableSpending").Descendants();
+            var incomeTable = generalDataDoc.GetElementbyId("TablesIncome").Descendants();
+            var spendingTable = generalDataDoc.GetElementbyId("TablesSpending").Descendants();
+            var assetsLiabilitiesAndPeople = generalDataDoc.GetElementbyId("TablesAssetsLiabilitiesAndPeople").Descendants();
+            var charitableSpending = generalDataDoc.GetElementbyId("TablesCharitableSpending").Descendants();
 
             var htmlNodes = incomeTable as List<HtmlNode> ?? incomeTable.ToList();
             return new CharityProfile
                 {
-                    CharityName = GetAndProcessString(() => doc.GetElementbyId("ctl00_charityStatus_spnCharityName").InnerText),
-                    CharityRegistrationNumber = GetAndProcessString(() => doc.GetElementbyId("ctl00_charityStatus_spnCharityNo").InnerText),
-                    MissionStatement = GetAndProcessString(() => doc.GetElementbyId("ctl00_MainContent_ucDisplay_ucActivities_ucTextAreaInput_txtTextEntry").InnerText),
+                    CharityName = GetAndProcessString(() => generalDataDoc.GetElementbyId("ctl00_charityStatus_spnCharityName").InnerText),
+                    CharityRegistrationNumber = GetAndProcessString(() => generalDataDoc.GetElementbyId("ctl00_charityStatus_spnCharityNo").InnerText),
+                    MissionStatement = GetAndProcessString(() => generalDataDoc.GetElementbyId("ctl00_MainContent_ucDisplay_ucActivities_ucTextAreaInput_txtTextEntry").InnerText),
                     
                     Income = new Income
                         {
