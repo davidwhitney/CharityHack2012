@@ -1,4 +1,5 @@
 using CharityHack2012.Code.Http;
+using JustGiving.Api.Sdk;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(CharityHack2012.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivator.ApplicationShutdownMethodAttribute(typeof(CharityHack2012.App_Start.NinjectWebCommon), "Stop")]
@@ -47,6 +48,12 @@ namespace CharityHack2012.App_Start
             
             kernel.Bind<IHttpContentGetter>().To<CachingHttpContentGetter>();
             kernel.Bind<IHttpContentGetter>().To<HttpContentGetter>().WhenInjectedInto<CachingHttpContentGetter>();
+
+            kernel.Bind<IJustGivingClient>().ToMethod(context =>
+                {
+                    var clientConfiguration = new ClientConfiguration("https://api-sandbox.justgiving.com/", "8b347861", 1);
+                    return new JustGivingClient(clientConfiguration);
+                }).InRequestScope();
             
             RegisterServices(kernel);
             return kernel;
