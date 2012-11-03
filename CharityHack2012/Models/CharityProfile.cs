@@ -17,5 +17,9 @@
     {
         public string Total { get; set; }
         public string Voluntary { get; set; }
+        public string TradingToRaiseFunds { get; set; }
+        public string Investment { get; set; }
+        public string CharitableActivities { get; set; }
+        public string Other { get; set; }
     }
 }

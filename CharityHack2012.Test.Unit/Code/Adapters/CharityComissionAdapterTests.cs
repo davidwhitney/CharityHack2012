@@ -38,6 +38,11 @@ namespace CharityHack2012.Test.Unit.Code.Adapters
             Assert.That(charityProfile.CharityName, Is.EqualTo("cancer research uk"));
             Assert.That(charityProfile.CharityRegistrationNumber, Is.EqualTo("1089464"));
             Assert.That(charityProfile.Income.Total, Is.EqualTo("492,627,000"));
+            Assert.That(charityProfile.Income.Voluntary, Is.EqualTo("350,080,000"));
+            Assert.That(charityProfile.Income.TradingToRaiseFunds, Is.EqualTo("82,071,000"));
+            Assert.That(charityProfile.Income.Investment, Is.EqualTo("2,914,000"));
+            Assert.That(charityProfile.Income.CharitableActivities, Is.EqualTo("57,562,000"));
+            Assert.That(charityProfile.Income.Other, Is.EqualTo("0"));
         }
     }
 }

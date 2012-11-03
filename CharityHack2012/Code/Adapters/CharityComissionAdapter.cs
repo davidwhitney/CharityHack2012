@@ -46,6 +46,10 @@ namespace CharityHack2012.Code.Adapters
                         {
                             Total = incomeTable.First(x => x.InnerText == "Total").NextSibling.NextSibling.InnerText,
                             Voluntary = incomeTable.First(x => x.InnerText == "Voluntary").NextSibling.NextSibling.InnerText,
+                            TradingToRaiseFunds = incomeTable.First(x => x.InnerText == "Trading to raise funds").NextSibling.NextSibling.InnerText,
+                            Investment = incomeTable.First(x => x.InnerText == "Investment").NextSibling.NextSibling.InnerText,
+                            CharitableActivities = incomeTable.First(x => x.InnerText == "Charitable activities").NextSibling.NextSibling.InnerText,
+                            Other = incomeTable.First(x => x.InnerText == "Other").NextSibling.NextSibling.InnerText,
                         }
                 };
 
