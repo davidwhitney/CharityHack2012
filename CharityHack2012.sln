@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CharityHack2012", "CharityHack2012\CharityHack2012.csproj", "{F7F6CF47-C6DC-425B-B8FA-06FFF9B63DAB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CharityHack2012.Test.Unit", "CharityHack2012.Test.Unit\CharityHack2012.Test.Unit.csproj", "{4DEA880A-C199-477D-AA0A-CCFE1F6CA6ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{F7F6CF47-C6DC-425B-B8FA-06FFF9B63DAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7F6CF47-C6DC-425B-B8FA-06FFF9B63DAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7F6CF47-C6DC-425B-B8FA-06FFF9B63DAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DEA880A-C199-477D-AA0A-CCFE1F6CA6ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DEA880A-C199-477D-AA0A-CCFE1F6CA6ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DEA880A-C199-477D-AA0A-CCFE1F6CA6ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DEA880A-C199-477D-AA0A-CCFE1F6CA6ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
