@@ -1,2 +1,10 @@
-﻿body {
+﻿.navbar.navbar-fixed-top .brand {
+  background-image: url(/content/img/logo-small.png);
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  text-indent: -9999px;
+  overflow: hidden;
+  text-align: left;
+  width: 244px;
+  height: 12px;
 }
