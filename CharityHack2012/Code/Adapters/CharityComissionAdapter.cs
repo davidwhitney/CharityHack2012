@@ -56,7 +56,12 @@ namespace CharityHack2012.Code.Adapters
                     Expenditure = new Expenditure
                         {
                             GeneratingVoluntaryIncome = spendingTable.First(x => x.InnerText == "Generating voluntary income").NextSibling.NextSibling.InnerText,
-                            Governance = spendingTable.First(x => x.InnerText == "Governance").NextSibling.NextSibling.InnerText
+                            Governance = spendingTable.First(x => x.InnerText == "Governance").NextSibling.NextSibling.InnerText,
+                            TradingToRaiseFunds = spendingTable.First(x => x.InnerText == "Trading to raise funds").NextSibling.NextSibling.InnerText,
+                            InvestmentManagement = spendingTable.First(x => x.InnerText == "Investment management").NextSibling.NextSibling.InnerText,
+                            CharitableActivities = spendingTable.First(x => x.InnerText == "Charitable activities").NextSibling.NextSibling.InnerText,
+                            Other = spendingTable.First(x => x.InnerText == "Other").NextSibling.NextSibling.InnerText,
+                            Total = spendingTable.First(x => x.InnerText == "Total").NextSibling.NextSibling.InnerText,
                         }
                 };
 
