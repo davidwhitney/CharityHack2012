@@ -1,16 +1,32 @@
 ﻿body {
   background: #fffcb4;
+  margin-top: 1px;
+  color: #3c3c3c; 
 }
-.navbar.navbar-fixed-top .brand {
+
+.navbar.navbar-top {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-top: 2px solid #eae79c;
+  border-bottom: 2px solid #eae79c;
+}
+
+.navbar .container {
+  width: 940px;
+}
+
+.navbar.navbar-top .brand {
   background-image: url(/content/img/logo-small.png);
   background-repeat: no-repeat;
   background-position: 0 0;
   text-indent: -9999px;
   overflow: hidden;
   text-align: left;
-  width: 244px;
-  height: 12px;
+  width: 344px;
+  height: 41px;
+  padding: 0;
   margin-right: 1.5em;
+  margin-left: 0;
 }
 
 .navbar .nav {
@@ -22,16 +38,23 @@ h1, h2, h3 {
   font-size: 100%;
 }
 
+article {
+  margin-right: 3em;
+}
+
+article, aside {
+  float: left;
+}
+
 #search, #news {
-  background-color: #fff;
+/*  background-color: #fff;
   box-shadow: 0 0 10px rgba(0,0,0,0.2);
-  padding: 1em 1em 1em 4em;
-  border-radius: 5px;
+  padding: 0.5em 3em 1em;
+  border-radius: 5px;*/
 }
 
 #search {
   overflow: hidden;
-  width: 30%;
 }
 
 #search h2 {
@@ -42,7 +65,7 @@ h1, h2, h3 {
 
 #search input {
   float: left;
-  width: 80%;
+  width: 94%;
 }
 #search input[type='button'] {
   clear: left;
@@ -51,4 +74,44 @@ h1, h2, h3 {
   width: auto;
 }
 
+footer {
+  clear: both;
+}
+
+#info {
+  width: 70%;
+  float: left;
+}
+
+#info h1 {
+  margin-bottom: 0;
+  font-size: 140%;
+  text-transform: uppercase;
+}
+
+#info img {
+  float: left;
+  margin-right: 15px;
+}
+
+#actions {
+  float: left;
+  margin: 4.8em 5em;
+}
+
+#actions a {
+  background-color: #0072bb;
+  background-image: -moz-linear-gradient(top,#0072bb,#0072bb);
+  background-image: -ms-linear-gradient(top,#0072bb,#0072bb);
+  background-image: -webkit-gradient(linear,0 0,0 100%,from(#0072bb),to(#0072bb));
+  background-image: -webkit-linear-gradient(top,#0072bb,#0072bb);
+  background-image: -o-linear-gradient(top,#0072bb,#0072bb);
+  background-image: linear-gradient(top,#0072bb,#0072bb);
+  background-repeat: repeat-x;
+  color: white;
+  height: 38px;
+  font-size: 18px;
+  line-height: 38px;
+  padding: 20px 26px;
+}
 
