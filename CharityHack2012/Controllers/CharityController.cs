@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace CharityHack2012.Controllers
 {
-    public class HomeController : Controller
+    public class CharityController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
 
