@@ -10,4 +10,45 @@
   text-align: left;
   width: 244px;
   height: 12px;
+  margin-right: 1.5em;
 }
+
+.navbar .nav {
+  margin-top: 5px;
+}
+
+h1, h2, h3 {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 100%;
+}
+
+#search, #news {
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  padding: 1em 1em 1em 4em;
+  border-radius: 5px;
+}
+
+#search {
+  overflow: hidden;
+  width: 30%;
+}
+
+#search h2 {
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 160%;
+  margin-bottom: 0;
+}
+
+#search input {
+  float: left;
+  width: 80%;
+}
+#search input[type='button'] {
+  clear: left;
+  display: block;
+  float: right;
+  width: auto;
+}
+
+
