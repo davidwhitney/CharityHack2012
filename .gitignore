@@ -8,3 +8,4 @@
 /_ReSharper.CharityHack2012
 /CharityHack2012/CharityHack2012.csproj.user
 *.user
+/CharityHack2012/App_Data/*.html
