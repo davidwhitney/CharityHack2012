@@ -281,6 +281,7 @@
     <Content Include="Views\Charity\Index.cshtml" />
     <Content Include="Views\Charity\Compare.cshtml" />
     <Content Include="Views\Shared\MoneyReport.cshtml" />
+    <Content Include="Views\Shared\MoneyReportComparisonTable.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

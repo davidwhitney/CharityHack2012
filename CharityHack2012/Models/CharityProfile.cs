@@ -40,40 +40,40 @@ namespace CharityHack2012.Models
 
     public class Income
     {
-        public string Total { get; set; }
-        public string Voluntary { get; set; }
-        public string TradingToRaiseFunds { get; set; }
-        public string Investment { get; set; }
-        public string CharitableActivities { get; set; }
-        public string Other { get; set; }
-        public string InvestmentGains { get; set; }
+        public decimal? Total { get; set; }
+        public decimal? Voluntary { get; set; }
+        public decimal? TradingToRaiseFunds { get; set; }
+        public decimal? Investment { get; set; }
+        public decimal? CharitableActivities { get; set; }
+        public decimal? Other { get; set; }
+        public decimal? InvestmentGains { get; set; }
     }
     
     public class Expenditure
     {
-        public string GeneratingVoluntaryIncome { get; set; }
-        public string Governance { get; set; }
-        public string TradingToRaiseFunds { get; set; }
-        public string InvestmentManagement { get; set; }
-        public string CharitableActivities { get; set; }
-        public string Other { get; set; }
-        public string Total { get; set; }
+        public decimal? GeneratingVoluntaryIncome { get; set; }
+        public decimal? Governance { get; set; }
+        public decimal? TradingToRaiseFunds { get; set; }
+        public decimal? InvestmentManagement { get; set; }
+        public decimal? CharitableActivities { get; set; }
+        public decimal? Other { get; set; }
+        public decimal? Total { get; set; }
     }
 
     public class AssetsLiabilitiesAndPeople
     {
-        public string OwnUseAssets { get; set; }
-        public string LongTermInvestments { get; set; }
-        public string OtherAssets { get; set; }
-        public string TotalLiabilities { get; set; }
-        public string Employees { get; set; }
-        public string Volunteers { get; set; }
+        public decimal? OwnUseAssets { get; set; }
+        public decimal? LongTermInvestments { get; set; }
+        public decimal? OtherAssets { get; set; }
+        public decimal? TotalLiabilities { get; set; }
+        public decimal? Employees { get; set; }
+        public decimal? Volunteers { get; set; }
     }
 
     public class CharitableSpending
     {
-        public string IncomeGenerationAndGovernance { get; set; }
-        public string CharitableSpendingTotal { get; set; }
+        public decimal? IncomeGenerationAndGovernance { get; set; }
+        public decimal? CharitableSpendingTotal { get; set; }
     }
 
     public class CharitySearchResult
