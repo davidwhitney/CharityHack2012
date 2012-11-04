@@ -82,6 +82,18 @@
         {
             @: <span class="label label-info">Charity has more trustees than employees.</span>
         }
+        @{
+            decimal? gainsOnInvestments = 0m;
+            if(Model.Income.InvestmentGains.GetValueOrDefault(0) != 0
+                && Model.Income.Investment.GetValueOrDefault(0) != 0)
+            {
+                gainsOnInvestments = (Model.Income.InvestmentGains/Model.Income.Investment*100);
+            }
+        }
+        @if (gainsOnInvestments > 10)
+        {
+            @: <span class="label label-success">Charities invest wisely and recieve @gainsOnInvestments)% return on their investments.</span>
+        }
 
     </div>
 </div>
