@@ -30,6 +30,11 @@ namespace CharityHack2012
                         "~/Content/css/bootstrap*",
                         "~/Content/Site.css"));
 
+            bundles.Add(new ScriptBundle("~/bundles/jquery.jqplot").Include(
+                        "~/Scripts/jquery.jqplot.min.js",
+                        "~/Scripts/jqplot.pieRenderer.min.js"
+                ));
+
             BundleTable.EnableOptimizations = true;
         }
     }
