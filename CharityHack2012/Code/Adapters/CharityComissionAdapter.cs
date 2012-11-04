@@ -64,7 +64,7 @@ namespace CharityHack2012.Code.Adapters
                     .ToList();
             var trusteeNames = trusteeNodes.Select(trustee => GetAndProcessString(()=>trustee.InnerText)).Where(x=>!string.IsNullOrWhiteSpace(x)).ToList();
 
-            return new CharityProfile
+            var prof = new CharityProfile
                 {
                     CharityName = GetAndProcessString(() => generalDataDoc.GetElementbyId("ctl00_charityStatus_spnCharityName").InnerText),
                     CharityRegistrationNumber = GetAndProcessString(() => generalDataDoc.GetElementbyId("ctl00_charityStatus_spnCharityNo").InnerText),
@@ -73,42 +73,44 @@ namespace CharityHack2012.Code.Adapters
 
                     Income = new Income
                         {
-                            Total = GetAndProcessString(() => incomeTable.TableValue("Total")),
-                            Voluntary = GetAndProcessString(() => incomeTable.TableValue("Voluntary")),
-                            TradingToRaiseFunds = GetAndProcessString(() => incomeTable.TableValue("Trading to raise funds")),
-                            Investment = GetAndProcessString(() => incomeTable.TableValue("Investment")),
-                            CharitableActivities = GetAndProcessString(() =>incomeTable.TableValue("Charitable activities")),
-                            Other = GetAndProcessString(() => incomeTable.TableValue("Other")),
-                            InvestmentGains = GetAndProcessString(() => incomeTable.TableValue("Investment gains")),
+                            Total = GetAndProcessDecimal(() => incomeTable.TableValue("Total")),
+                            Voluntary = GetAndProcessDecimal(() => incomeTable.TableValue("Voluntary")),
+                            TradingToRaiseFunds = GetAndProcessDecimal(() => incomeTable.TableValue("Trading to raise funds")),
+                            Investment = GetAndProcessDecimal(() => incomeTable.TableValue("Investment")),
+                            CharitableActivities = GetAndProcessDecimal(() => incomeTable.TableValue("Charitable activities")),
+                            Other = GetAndProcessDecimal(() => incomeTable.TableValue("Other")),
+                            InvestmentGains = GetAndProcessDecimal(() => incomeTable.TableValue("Investment gains")),
                         },
 
                     Expenditure = new Expenditure
                         {
-                            GeneratingVoluntaryIncome = GetAndProcessString(() => spendingTable.TableValue("Generating voluntary income")),
-                            Governance = GetAndProcessString(() => spendingTable.TableValue("Governance")),
-                            TradingToRaiseFunds = GetAndProcessString(() => spendingTable.TableValue("Trading to raise funds")),
-                            InvestmentManagement = GetAndProcessString(() => spendingTable.TableValue("Investment management")),
-                            CharitableActivities = GetAndProcessString(() => spendingTable.TableValue("Charitable activities")),
-                            Other = GetAndProcessString(() => spendingTable.TableValue("Other")),
-                            Total = GetAndProcessString(() => spendingTable.TableValue("Total")),
+                            GeneratingVoluntaryIncome = GetAndProcessDecimal(() => spendingTable.TableValue("Generating voluntary income")),
+                            Governance = GetAndProcessDecimal(() => spendingTable.TableValue("Governance")),
+                            TradingToRaiseFunds = GetAndProcessDecimal(() => spendingTable.TableValue("Trading to raise funds")),
+                            InvestmentManagement = GetAndProcessDecimal(() => spendingTable.TableValue("Investment management")),
+                            CharitableActivities = GetAndProcessDecimal(() => spendingTable.TableValue("Charitable activities")),
+                            Other = GetAndProcessDecimal(() => spendingTable.TableValue("Other")),
+                            Total = GetAndProcessDecimal(() => spendingTable.TableValue("Total")),
                         },
 
                     AssetsLiabilitiesAndPeople = new AssetsLiabilitiesAndPeople
                         {
-                            OwnUseAssets = GetAndProcessString(() => assetsLiabilitiesAndPeople.TableValue("Own use assets")),
-                            LongTermInvestments = GetAndProcessString(() => assetsLiabilitiesAndPeople.TableValue("Long term investments")),
-                            OtherAssets = GetAndProcessString(() => assetsLiabilitiesAndPeople.TableValue("Other assets")),
-                            TotalLiabilities = GetAndProcessString(() => assetsLiabilitiesAndPeople.TableValue("Total liabilities")),
-                            Employees = GetAndProcessString(() => assetsLiabilitiesAndPeople.TableValue("Employees")),
-                            Volunteers = GetAndProcessString(() => assetsLiabilitiesAndPeople.TableValue("Volunteers")),
+                            OwnUseAssets = GetAndProcessDecimal(() => assetsLiabilitiesAndPeople.TableValue("Own use assets")),
+                            LongTermInvestments = GetAndProcessDecimal(() => assetsLiabilitiesAndPeople.TableValue("Long term investments")),
+                            OtherAssets = GetAndProcessDecimal(() => assetsLiabilitiesAndPeople.TableValue("Other assets")),
+                            TotalLiabilities = GetAndProcessDecimal(() => assetsLiabilitiesAndPeople.TableValue("Total liabilities")),
+                            Employees = GetAndProcessDecimal(() => assetsLiabilitiesAndPeople.TableValue("Employees")),
+                            Volunteers = GetAndProcessDecimal(() => assetsLiabilitiesAndPeople.TableValue("Volunteers")),
                         },
 
                     CharitableSpending = new CharitableSpending
                         {
-                            IncomeGenerationAndGovernance = GetAndProcessString(() => charitableSpending.TableValue("Income generation and governance")),
-                            CharitableSpendingTotal = GetAndProcessString(() => charitableSpending.TableValue("Charitable spending")),
+                            IncomeGenerationAndGovernance = GetAndProcessDecimal(() => charitableSpending.TableValue("Income generation and governance")),
+                            CharitableSpendingTotal = GetAndProcessDecimal(() => charitableSpending.TableValue("Charitable spending")),
                         }
                 };
+
+            return prof;
         }
 
         private static IEnumerable<HtmlNode> GetById(HtmlDocument generalDataDoc, string id)
@@ -139,6 +141,27 @@ namespace CharityHack2012.Code.Adapters
             catch
             {
                 return string.Empty;
+            }
+        }
+
+        public decimal? GetAndProcessDecimal(Func<string> getString)
+        {
+            try
+            {
+                var @string = getString();
+                @string = @string.Replace("\n", "");
+                @string = @string.Replace("\r", "");
+                @string = @string.Replace("&nbsp;-&nbsp;", "");
+                @string = @string.Replace("&nbsp;", "");
+                @string = @string.Replace("&amp;", "&");
+                @string = @string.Trim();
+
+                decimal dec;
+                return decimal.TryParse(@string, out dec) ? (decimal?) dec : null;
+            }
+            catch
+            {
+                return null;
             }
         }
     }
