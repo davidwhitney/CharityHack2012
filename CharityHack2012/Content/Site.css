@@ -64,36 +64,15 @@ article, aside {
   float: left;
 }
 
-#search, #news {
-/*  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
-  padding: 0.5em 3em 1em;
-  border-radius: 5px;*/
-}
-
 #news h2,
 #search h2 {
   line-height: 160%;
 }
-#search {
-  overflow: hidden;
-  width: 20em;
-}
 
 #search h2 {
-  font-family: Arial, Helvetica, sans-serif;
-  margin-bottom: 0;
-}
-
-#search input {
-  float: left;
-  width: 94%;
-}
-#search input[type='button'] {
-  clear: left;
-  display: block;
-  float: right;
-  width: auto;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 0;
+    padding-bottom: 20px;
 }
 
 #news {

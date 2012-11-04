@@ -1,11 +1,16 @@
 ﻿@model List<CharityHack2012.Models.CharitySearchResult>
 <article>
-    <div id="search">
+    <div id="search" class="form-search">
         @using(Html.BeginForm("Search", "Home")){
         <h2>Seach for charity or cause</h2>
-        <input type="text" name="query" placeholder="">
-        <input type="submit" value="Search">
+        
+        <div class="input-append">
+            <input type="text" name="query" class="span2 search-query" style="width: 260px;">
+            <button type="submit" class="btn">Search</button>
+        </div>
+            
         }
+
     </div>
         
     @if(Model.Count > 0){
@@ -16,6 +21,13 @@
             @Html.ActionLink(match.CharityDisplayName, "Index", "Charity", new {id = match.CharityRegistrationNumber}, new {}); @: <br/>
         }
     </div>
+    } else{
+
+    <blockquote>
+        <p>Data without context is meaningless and as good as useless</p>
+        <small>Anon <cite title="Source Title">-</cite></small>
+    </blockquote>
+        
     }
 
 </article>
