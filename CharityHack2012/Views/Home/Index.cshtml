@@ -1,29 +1,61 @@
 ﻿@model List<CharityHack2012.Models.CharitySearchResult>
-<article>
-    <div id="search">
-        @using(Html.BeginForm("Search", "Home")){
-        <h2>Seach for charity or cause</h2>
-        <input type="text" name="query" placeholder="">
-        <input type="submit" value="Search">
-        }
-    </div>
+
+
+            
+@if(Model.Count == 0){
+<div class="hero-unit" style="background-image: url(/Content/img/hero.png);">
+    <h1 style="padding-bottom: 30px;">Support the right charity</h1>
+    <p>
+        We know that supporting charities is a deeply personal thing, and as with all personal things, it pays to be informed.<br/><br/>    
+        Charity Supermarket helps you pick the charity that is more relevant to you, so you know your support really counts.
+    </p>
+</div>
+}
+
+<div class="row">
+    <div class="span7">
+        <article>
+            <div id="search" class="form-search">
+                @using(Html.BeginForm("Search", "Home")){
+                    <h2>Seach for charity or cause</h2>
         
-    @if(Model.Count > 0){
-    <div id="searchResults">
-        <h3>Search results</h3>       
-        @foreach(var match in Model)
-        {
-            @Html.ActionLink(match.CharityDisplayName, "Index", "Charity", new {id = match.CharityRegistrationNumber}, new {}); @: <br/>
-        }
+                    <div class="input-append">
+                        <input type="text" name="query" class="span2 search-query" style="width: 260px;">
+                        <button type="submit" class="btn">Search</button>
+                    </div>
+                }
+            </div>
+        
+            @if(Model.Count > 0){
+                <div id="searchResults">
+                    <h3>Search results</h3>       
+                    @foreach(var match in Model)
+                    {
+                        @Html.ActionLink(match.CharityDisplayName, "Index", "Charity", new {id = match.CharityRegistrationNumber}, new {}); @: <br/>
+                    }
+                </div>
+            } else{
+                <blockquote>
+                    <p>Statistical thinking will one day be as necessary a qualification for efficient citizenship as the ability to read and write.</p>
+                    <small>H.G. Wells</small>
+                </blockquote>
+            }
+
+
+        </article>
     </div>
-    }
 
-</article>
+    <div class="span3">
+    
+        <aside id='news'>
+            <h2>Popular charities</h2>
+            <ul>
+                <li>@Html.ActionLink("Cancer Research UK", "Index", "Charity", new { id = 1089464 }, new {  })</li>
+                <li>@Html.ActionLink("Against Breast Cancer Ltd", "Index", "Charity", new { id = 1121258 }, new {  })</li>
+                <li>@Html.ActionLink("Central Hertfordshire YMCA", "Index", "Charity", new { id = 1065875 }, new {  })</li>
+                <li>@Html.ActionLink("Malt Cross Trust Company", "Index", "Charity", new { id = 1058559 }, new {  })</li>
+            </ul>
+        </aside>
 
-<aside id='news'>
-    <h2>Popular charities</h2>
-    <ul>
-        <li>@Html.ActionLink("Cancer Research UK", "Index", "Charity", new { id = 1089464 }, new {  })</li>
-        <li>@Html.ActionLink("Against Breast Cancer Ltd", "Index", "Charity", new { id = 1121258 }, new {  })</li>
-    </ul>
-</aside>
+    </div>
+</div>
