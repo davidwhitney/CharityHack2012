@@ -34,9 +34,15 @@
                     <span class="icon-bar"></span>
                 </a>
                 <a class="brand" href="@Url.Action("Index", "Home")">CharitySupermarket</a>
-                <div class="nav-collapse collapse">
-                    <ul class="nav">
-                    </ul>
+                <div class="pull-right">
+                   
+                        @using(Html.BeginForm("Search", "Home")){
+                            
+                            <div class="input-append">
+                              <input class="span2" name="query" id="appendedInputButton" type="text">
+                              <button class="btn" type="button">Search</button>
+                            </div>
+                        }
                 </div>
                 <!--/.nav-collapse -->
             </div>

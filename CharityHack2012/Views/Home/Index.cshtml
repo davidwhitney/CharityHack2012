@@ -20,7 +20,7 @@
                     <h2>Seach for charity or cause</h2>
         
                     <div class="input-append">
-                        <input type="text" name="query" class="span2 search-query" style="width: 260px;">
+                        <input type="text" name="query" class="span2 search-query" style="width: 260px;" value="@Request.QueryString["query"]">
                         <button type="submit" class="btn">Search</button>
                     </div>
                 }
