@@ -15,7 +15,15 @@
 <div class="row">
     <a id="summary"></a>
     <div class="span10">
+        <h2>@Model.First().CharityName</h2>
+        @Html.Partial("MoneyReport", Model.First());
+    </div>
+</div>
 
-       
+<div class="row">
+    <a id="summary"></a>
+    <div class="span10">
+        <h2>@Model.Skip(1).First().CharityName</h2>
+        @Html.Partial("MoneyReport", Model.Skip(1).First());
     </div>
 </div>

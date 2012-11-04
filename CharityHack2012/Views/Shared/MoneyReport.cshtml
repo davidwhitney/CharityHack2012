@@ -1,0 +1,38 @@
+﻿
+        <div id="monies" class="row">
+            <h2>Finances</h2>
+            <div class="span3">
+                <h2>Income</h2>
+                <ul>
+                    <li><strong>Total:</strong> @Model.Income.Total</li>
+                    <li><strong>Investment gains:</strong> @Model.Income.InvestmentGains</li>
+                    <li><strong>Investment:</strong> @Model.Income.Investment</li>
+                    <li><strong>Trading to raise funds:</strong> @Model.Income.TradingToRaiseFunds</li>
+                    <li><strong>Voluntary:</strong> @Model.Income.Voluntary</li>
+                    <li><strong>Other:</strong> @Model.Income.Other</li>
+                </ul>
+            </div>
+
+            <div class="span3">
+                <h2>Expenses</h2>
+                <ul>
+                    <li><strong>Total:</strong> @Model.Expenditure.Total</li>
+                    <li><strong>Charitable activities:</strong> @Model.Expenditure.CharitableActivities</li>
+                    <li><strong>Investment management:</strong> @Model.Expenditure.InvestmentManagement</li>
+                    <li><strong>Spent raising more money:</strong> @Model.Expenditure.TradingToRaiseFunds</li>
+                </ul>
+            </div>
+            
+            <div class="span3">
+                <h2>Assets liabilities and People</h2>
+                <ul>
+                    <li><strong>Own Use Assets:</strong> @Model.AssetsLiabilitiesAndPeople.OwnUseAssets</li>
+                    <li><strong>Long Term Investments:</strong> @Model.AssetsLiabilitiesAndPeople.LongTermInvestments</li>
+                    <li><strong>Other Assets:</strong> @Model.AssetsLiabilitiesAndPeople.OtherAssets</li>
+                    <li><strong>Total Liabilities:</strong> @Model.AssetsLiabilitiesAndPeople.TotalLiabilities</li>
+                    <li><strong>Employees:</strong> @Model.AssetsLiabilitiesAndPeople.Employees</li>
+                    <li><strong>Volunteers:</strong> @Model.AssetsLiabilitiesAndPeople.Volunteers</li>
+                </ul>
+            </div>
+
+        </div>
