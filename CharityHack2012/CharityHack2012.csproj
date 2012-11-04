@@ -236,6 +236,8 @@
     <Content Include="Global.asax" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\g.pie-min.js" />
+    <Content Include="Scripts\g.raphael-min.js" />
     <Content Include="Scripts\jqplot.pieRenderer.min.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -251,6 +253,7 @@
     <Content Include="Scripts\json2.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\pie.js" />
+    <Content Include="Scripts\raphael-min.js" />
     <Content Include="Scripts\renderCharityChart.js" />
     <Content Include="Scripts\socialite.min.js" />
     <Content Include="Web.config" />

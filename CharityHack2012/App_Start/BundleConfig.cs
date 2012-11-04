@@ -35,6 +35,10 @@ namespace CharityHack2012
                         "~/Scripts/jqplot.pieRenderer.min.js"
                 ));
 
+            bundles.Add(new ScriptBundle("~/bundles/raphael").Include(
+                        "~/Scripts/*raphael"
+                ));
+
             BundleTable.EnableOptimizations = true;
         }
     }

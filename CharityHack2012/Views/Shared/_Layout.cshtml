@@ -16,15 +16,15 @@
 
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     @Styles.Render("~/Content/styles")
-    @*@Scripts.Render("~/bundles/modernizr")*@
+    @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jquery.jqplot")
+    @Scripts.Render("~/bundles/raphael")
 
     <link rel="stylesheet" type="text/css" href="/content/css/jquery.jqplot.min.css">
 </head>
 
 <body>
-
     <div class="navbar navbar-inverse navbar-top">
         <div class="navbar-inner">
             <div class="container">
@@ -34,10 +34,7 @@
                     <span class="icon-bar"></span>
                 </a>
                 <a class="brand" href="@Url.Action("Index", "Home")">CharitySupermarket</a>
-                
-
                 <div class="pull-right">
-                   
                     @using(Html.BeginForm("Search", "Home")){
                             
                         <div class="input-append">
@@ -78,7 +75,6 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
     
