@@ -23,10 +23,10 @@
 <div class="navbar">
   <div class="navbar-inner">
     <ul class="nav">
-      <li class="active"><a href="#">Financial information</a></li>
-      <li><a href="#">In the news</a></li>
-      <li><a href="#">Similar charities</a></li>
-      <li><a href="#">Discussion</a></li>
+      <li><a href="#finances" class="navbar-link">Financial information</a></li>
+      <li><a href="#inthenews" class="navbar-link">In the news</a></li>
+      <li><a href="#similarcharities" class="navbar-link">Similar charities</a></li>
+      <li><a href="#discussion" class="navbar-link">Discussion</a></li>
     </ul>
   </div>
 </div>
@@ -34,6 +34,7 @@
 
 <div class="row">
     <div class="span10">
+        <a id="finances"></a>
 
         <div id="monies" class="row">
             <h2>Finances</h2>
@@ -76,7 +77,8 @@
         <hr/>
 
         <div class="row">
-            
+            <a id="inthenews"></a>
+            <a id="similarcharities"></a>
             <div class="span5">
                 <h2>In the news...</h2>
                 @foreach(var newsItem in Model.NewsItems)
@@ -103,6 +105,7 @@
         
         <div class="row">
             
+            <a id="discussion"></a>
             <h2>Discuss this charity</h2>
 
             <div class="span10">
@@ -132,3 +135,11 @@
 <div id="chartdiv" style="height:400px;width:300px; "></div>
 
 <script type="text/javascript" src="/Scripts/renderCharityChart.js"></script>
+
+<script type="text/javascript">
+
+    $('.navbar-link').click(function () {
+        $('.navbar-link').parent().removeClass('active');
+        $(this).parent().addClass('active');
+    });
+</script>
