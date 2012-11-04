@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using CharityHack2012.Models;
 using JustGiving.Api.Sdk;
 
 namespace CharityHack2012.Controllers
@@ -41,12 +41,5 @@ namespace CharityHack2012.Controllers
         {
             return RedirectToAction("Index", "Home", new {query = query});
         }
-    }
-
-    public class CharitySearchResult
-    {
-        public int JgCharityId { get; set; }
-        public string CharityDisplayName { get; set; }
-        public string CharityRegistrationNumber { get; set; }
     }
 }
