@@ -1,11 +1,15 @@
+using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Web.Mvc;
+using CharityHack2012.Code;
 using CharityHack2012.Code.Adapters;
 using CharityHack2012.Models;
 using JustGiving.Api.Sdk;
 using System.Linq;
 using JustGiving.Api.Sdk.Model.Search;
 using CharitySearchResult = JustGiving.Api.Sdk.Model.Search.CharitySearchResult;
+
 
 namespace CharityHack2012.Controllers
 {
@@ -50,16 +54,42 @@ namespace CharityHack2012.Controllers
         private CharityProfile LoadCharityProfile(string id)
         {
             var charityProfile = _charityComissionAdapter.LoadByRegNo(id);
-            var charityNewsOnGuardian = _guardianApiAdapter.SearchContentByCharityName(charityProfile.CharityName);
-            charityProfile.NewsItems = charityNewsOnGuardian.Response.Results;
 
             var vaguelyMatchingCharities = _jgClient.Search.CharitySearch(id);
             var thisCharity = vaguelyMatchingCharities.Results.FirstOrDefault(
                 x => x.RegistrationNumber.Contains(id) && charityProfile.CharityName.Contains(x.Name.ToLower()));
 
-            charityProfile.JgCharityData = thisCharity ?? new CharitySearchResult();
-            charityProfile.CharityImage = "http://v3-sandbox.justgiving.com" + (thisCharity == null ? "" : thisCharity.LogoFileName);
+            thisCharity = vaguelyMatchingCharities.Results.FirstOrDefault(x => x.RegistrationNumber.Contains(id));
+            if (CharityFoundOnJustGiving(thisCharity))
+            {
+                PopulateDataFromJustGiving(charityProfile, thisCharity);
+            }
+            else
+            {
+                SetupDefaultDataForCharity(charityProfile);
+            }
+
             return charityProfile;
+        }
+
+        private void SetupDefaultDataForCharity(CharityProfile charityProfile)
+        {
+            charityProfile.JgCharityData = new CharityEntity {Description = charityProfile.CharityName};
+            var charityNewsOnGuardian = _guardianApiAdapter.SearchContentByCharityName(charityProfile.CharityName);
+            charityProfile.NewsItems = charityNewsOnGuardian.Response.Results ?? new List<Item>();
+        }
+
+        private void PopulateDataFromJustGiving(CharityProfile charityProfile, CharitySearchResult thisCharity)
+        {
+            charityProfile.JgCharityData = JGCharitySearch.GetCharityDetails(Convert.ToInt32(thisCharity.CharityId));
+            charityProfile.CharityImage = "http://v3-sandbox.justgiving.com" + thisCharity.LogoFileName;
+            var charityNewsOnGuardian = _guardianApiAdapter.SearchContentByCharityNameAndKeywords(charityProfile.JgCharityData);
+            charityProfile.NewsItems = charityNewsOnGuardian.Response.Results ?? new List<Item>();
+        }
+
+        private static bool CharityFoundOnJustGiving(CharitySearchResult thisCharity)
+        {
+            return thisCharity != null;
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
+using JustGiving.Api.Sdk.Model.Charity;
 using RestSharp;
 
 namespace CharityHack2012.Code.Adapters
@@ -11,15 +13,38 @@ namespace CharityHack2012.Code.Adapters
 
         public GuardianEnvelope SearchContentByCharityName(string charityName)
         {
+            return SearchContentOnGuardian(charityName);
+        }
+
+        private static GuardianEnvelope SearchContentOnGuardian(string searchTerm)
+        {
             var restClient = new RestClient("http://content.guardianapis.com");
             var monthsAgo = DateTime.Now.MonthsAgo();
-            var request = new RestRequest("search?q={charityName}&page-size={pageSize}&from-date={fromDate}&to-date={toDate}&format=json&show-fields=all&api-key={apiKey}&section=society&tag=society/charities", Method.GET);
-            request.AddUrlSegment("charityName", string.Format("\"{0}\"", charityName));
+            var request =
+                new RestRequest(
+                    "search?q={searchTerm}&page-size={pageSize}&from-date={fromDate}&to-date={toDate}&format=json&show-fields=all&api-key={apiKey}&section=society&tag=society/charities",
+                    Method.GET);
+            request.AddUrlSegment("searchTerm", string.Format("\"{0}\"", searchTerm));
             request.AddUrlSegment("fromDate", monthsAgo.ToString("yyyy-MM-dd"));
             request.AddUrlSegment("toDate", DateTime.Now.ToString("yyyy-MM-dd"));
             request.AddUrlSegment("pageSize", "50");
             request.AddUrlSegment("apiKey", "cb7544ye6y758hp8fks5p4ke");
             return restClient.Execute<GuardianEnvelope>(request).Data;
+        }
+
+        public GuardianEnvelope SearchContentByCharityNameAndKeywords(CharityEntity charity)
+        {
+            if (charity.Keywords == null)
+            {
+                charity.Keywords = "";
+            }
+            var searchTerms = new StringBuilder();
+            searchTerms.Append(charity.Name);
+            foreach(var keyword in charity.Keywords.Split(','))
+            {
+                searchTerms.Append(" " + keyword);
+            }
+            return SearchContentOnGuardian(searchTerms.ToString());
         }
     }
 
