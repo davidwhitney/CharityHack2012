@@ -1,38 +1,79 @@
 ﻿@model CharityHack2012.Models.CharityProfile
 
-        <div id="monies" class="row">
-            <h2>Finances</h2>
-            <div class="span3">
-                <h2>Income</h2>
-                <ul>
-                    <li><strong>Total:</strong> @Model.Income.Total</li>
-                    <li><strong>Investment gains:</strong> @Model.Income.InvestmentGains</li>
-                    <li><strong>Investment:</strong> @Model.Income.Investment</li>
-                    <li><strong>Trading to raise funds:</strong> @Model.Income.TradingToRaiseFunds</li>
-                    <li><strong>Voluntary:</strong> @Model.Income.Voluntary</li>
-                    <li><strong>Other:</strong> @Model.Income.Other</li>
-                </ul>
-            </div>
+<div id="monies" class="row">
+    <h2>Finances</h2>
+    <div class="span3">
+        <h2>Income</h2>
+        <ul>
+            <li><strong>Total:</strong> @Model.Income.Total</li>
+            <li><strong>Investment gains:</strong> @Model.Income.InvestmentGains</li>
+            <li><strong>Investment:</strong> @Model.Income.Investment</li>
+            <li><strong>Trading to raise funds:</strong> @Model.Income.TradingToRaiseFunds</li>
+            <li><strong>Voluntary:</strong> @Model.Income.Voluntary</li>
+            <li><strong>Other:</strong> @Model.Income.Other</li>
+        </ul>
+    </div>
 
-            <div class="span3">
-                <h2>Expenses</h2>
-                <ul>
-                    <li><strong>Total:</strong> @Model.Expenditure.Total</li>
-                    <li><strong>Charitable activities:</strong> @Model.Expenditure.CharitableActivities</li>
-                    <li><strong>Investment management:</strong> @Model.Expenditure.InvestmentManagement</li>
-                    <li><strong>Spent raising more money:</strong> @Model.Expenditure.TradingToRaiseFunds</li>
-                </ul>
-            </div>
+    <div class="span3">
+        <h2>Expenses</h2>
+        <ul>
+            <li><strong>Total:</strong> @Model.Expenditure.Total</li>
+            <li><strong>Charitable activities:</strong> @Model.Expenditure.CharitableActivities</li>
+            <li><strong>Investment management:</strong> @Model.Expenditure.InvestmentManagement</li>
+            <li><strong>Spent raising more money:</strong> @Model.Expenditure.TradingToRaiseFunds</li>
+        </ul>
+    </div>
             
-            <div class="span3">
-                <h2>Assets &amp; People</h2>
-                <ul>
-                    <li><strong>Own Use Assets:</strong> @Model.AssetsLiabilitiesAndPeople.OwnUseAssets</li>
-                    <li><strong>Long Term Investments:</strong> @Model.AssetsLiabilitiesAndPeople.LongTermInvestments</li>
-                    <li><strong>Other Assets:</strong> @Model.AssetsLiabilitiesAndPeople.OtherAssets</li>
-                    <li><strong>Total Liabilities:</strong> @Model.AssetsLiabilitiesAndPeople.TotalLiabilities</li>
-                    <li><strong>Employees:</strong> @Model.AssetsLiabilitiesAndPeople.Employees</li>
-                    <li><strong>Volunteers:</strong> @Model.AssetsLiabilitiesAndPeople.Volunteers</li>
-                </ul>
-            </div>
-        </div>
+    <div class="span3">
+        <h2>Assets &amp; People</h2>
+        <ul>
+            <li><strong>Own Use Assets:</strong> @Model.AssetsLiabilitiesAndPeople.OwnUseAssets</li>
+            <li><strong>Long Term Investments:</strong> @Model.AssetsLiabilitiesAndPeople.LongTermInvestments</li>
+            <li><strong>Other Assets:</strong> @Model.AssetsLiabilitiesAndPeople.OtherAssets</li>
+            <li><strong>Total Liabilities:</strong> @Model.AssetsLiabilitiesAndPeople.TotalLiabilities</li>
+            <li><strong>Employees:</strong> @Model.AssetsLiabilitiesAndPeople.Employees</li>
+            <li><strong>Volunteers:</strong> @Model.AssetsLiabilitiesAndPeople.Volunteers</li>
+        </ul>
+    </div>
+
+</div>
+
+<div id="row" style="padding-top: 30px;">
+    
+    <div id="span10">
+        <h2>Analysis</h2>
+        @if(Model.VolenteerAverageRaised != null)
+        {
+            @: <span class="label label-info">Average volunteer raises @Model.VolenteerAverageRaised</span>
+        }
+        @if(Model.Income.Total > Model.Expenditure.Total)
+        {
+            @: <span class="label label-success">Charity raises more money than it spends in a calendar year.</span>
+        }
+        @if(Model.Income.Voluntary < Model.Expenditure.GeneratingVoluntaryIncome)
+        {
+            @: <span class="label label-error">Charity spends more raising voluntary income than they get in return.</span>
+        }
+        @if(Model.Income.Voluntary > Model.Expenditure.CharitableActivities)
+        {
+            @: <span class="label label-success">Charities voluntary income entirely covers their charitable activities.</span>
+        }
+        @if(Model.Income.InvestmentGains > Model.Expenditure.CharitableActivities)
+        {
+            @: <span class="label label-success">Charitys long term investment income entirely covers their charitable activities.</span>
+        }
+        @if (Model.AssetsLiabilitiesAndPeople.LongTermInvestments > 1000000)
+        {
+            @: <span class="label label-success">Charity has over a million pounds of long term investments - is likely self sustaining.</span>
+        }
+        @if (Model.AssetsLiabilitiesAndPeople.Volunteers > Model.AssetsLiabilitiesAndPeople.Employees)
+        {
+            @: <span class="label label-success">Charity has more volenteers than employees. Indicative of strong social support for their cause.</span>
+        }
+        @if (Model.AssetsLiabilitiesAndPeople.Employees > 500)
+        {
+            @: <span class="label label-info">Charity has a lot of employees and is probably run like a large business.</span>
+        }
+
+    </div>
+</div>

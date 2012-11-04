@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CharityHack2012.Code;
 using CharityHack2012.Code.Adapters;
-using JustGiving.Api.Sdk.Model.Charity;
 using JustGiving.Api.Sdk.Model.Search;
 
 namespace CharityHack2012.Models
@@ -35,6 +35,22 @@ namespace CharityHack2012.Models
         {
             Income = new Income();
             CharityImage = "/content/img/charity-logo-default.png";
+        }
+
+        public decimal? VolenteerAverageRaised
+        {
+            get
+            {
+                if(Income.Voluntary.GetValueOrDefault(Int32.MinValue) == Int32.MinValue
+                    || AssetsLiabilitiesAndPeople.Volunteers.GetValueOrDefault(Int32.MinValue) == Int32.MinValue
+                    || Income.Voluntary == 0
+                    || AssetsLiabilitiesAndPeople.Volunteers == 0)
+                {
+                    return null;
+                }
+
+                return Income.Voluntary/AssetsLiabilitiesAndPeople.Volunteers;
+            }
         }
     }
 
