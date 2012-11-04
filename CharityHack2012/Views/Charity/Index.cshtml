@@ -116,7 +116,7 @@
             <div class="span5">
                 <h2>Similar charities</h2>
                 <div>
-                    @foreach(var related in Model.RelatedCharities.Results.Where(x=>x.Name.ToLower() != Model.CharityName.ToLower()))
+                    @foreach(var related in Model.RelatedCharities.Results.Where(x=>x.Name.ToLower() != Model.CharityName.ToLower()).Take(10))
                     {
                         @: <div class="related">
                                @Html.ActionLink(related.Name, "Index", "Charity", new { id = related.RegistrationNumber }, new{})
