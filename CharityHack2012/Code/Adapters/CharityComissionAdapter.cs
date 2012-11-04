@@ -60,7 +60,7 @@ namespace CharityHack2012.Code.Adapters
                 trusteeDataDoc.DocumentNode.Descendants().Where(
                     x => x.Name == "a" 
                             && x.Id.Contains("ctl00_MainContent_") 
-                            && !x.InnerText.Contains("#99") 
+                            && !x.InnerText.Contains("#") 
                             && !x.InnerText.Contains("www."))
                     .ToList();
             var trusteeNames = trusteeNodes.Select(trustee => GetAndProcessString(()=>trustee.InnerText)).Where(x=>!string.IsNullOrWhiteSpace(x)).ToList();
