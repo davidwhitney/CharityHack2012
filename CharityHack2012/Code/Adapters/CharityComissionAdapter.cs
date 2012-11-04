@@ -12,8 +12,8 @@ namespace CharityHack2012.Code.Adapters
         private readonly IHttpContentGetter _httpGet;
 
         public string CharityComissionBaseUri { get { return "http://www.charity-commission.gov.uk"; } }
-        public string GeneralInfoPart { get { return "/Showcharity/RegisterOfCharities/CharityWithPartB.aspx?SubsidiaryNumber=0&RegisteredCharityNumber=";; } }
-        public string TrusteesPart { get { return "/Showcharity/RegisterOfCharities/ContactAndTrustees.aspx?SubsidiaryNumber=0&RegisteredCharityNumber="; ; } }
+        public string GeneralInfoPart { get { return "/Showcharity/RegisterOfCharities/CharityWithPartB.aspx?SubsidiaryNumber=0&RegisteredCharityNumber="; } }
+        public string TrusteesPart { get { return "/Showcharity/RegisterOfCharities/ContactAndTrustees.aspx?SubsidiaryNumber=0&RegisteredCharityNumber="; } }
 
         public CharityComissionAdapter(IHttpContentGetter httpGet)
         {
@@ -73,40 +73,40 @@ namespace CharityHack2012.Code.Adapters
 
                     Income = new Income
                         {
-                            Total = GetAndProcessString(() => incomeTable.First(x => x.InnerText == "Total").NextSibling.NextSibling.InnerText),
-                            Voluntary = GetAndProcessString(() => incomeTable.First(x => x.InnerText == "Voluntary").NextSibling.NextSibling.InnerText),
-                            TradingToRaiseFunds = GetAndProcessString(() =>incomeTable.First(x => x.InnerText == "Trading to raise funds").NextSibling.NextSibling.InnerText),
-                            Investment = GetAndProcessString(() =>incomeTable.First(x => x.InnerText == "Investment").NextSibling.NextSibling.InnerText),
-                            CharitableActivities = GetAndProcessString(() =>incomeTable.First(x => x.InnerText == "Charitable activities").NextSibling.NextSibling.InnerText),
-                            Other = GetAndProcessString(() =>incomeTable.First(x => x.InnerText == "Other").NextSibling.NextSibling.InnerText),
-                            InvestmentGains = GetAndProcessString(() =>incomeTable.First(x => x.InnerText == "Investment gains").NextSibling.NextSibling.InnerText),
+                            Total = GetAndProcessString(() => incomeTable.TableValue("Total")),
+                            Voluntary = GetAndProcessString(() => incomeTable.TableValue("Voluntary")),
+                            TradingToRaiseFunds = GetAndProcessString(() => incomeTable.TableValue("Trading to raise funds")),
+                            Investment = GetAndProcessString(() => incomeTable.TableValue("Investment")),
+                            CharitableActivities = GetAndProcessString(() =>incomeTable.TableValue("Charitable activities")),
+                            Other = GetAndProcessString(() => incomeTable.TableValue("Other")),
+                            InvestmentGains = GetAndProcessString(() => incomeTable.TableValue("Investment gains")),
                         },
 
                     Expenditure = new Expenditure
                         {
-                            GeneratingVoluntaryIncome = GetAndProcessString(() =>spendingTable.First(x => x.InnerText == "Generating voluntary income").NextSibling.NextSibling.InnerText),
-                            Governance = GetAndProcessString(() =>spendingTable.First(x => x.InnerText == "Governance").NextSibling.NextSibling.InnerText),
-                            TradingToRaiseFunds = GetAndProcessString(() =>spendingTable.First(x => x.InnerText == "Trading to raise funds").NextSibling.NextSibling.InnerText),
-                            InvestmentManagement = GetAndProcessString(() =>spendingTable.First(x => x.InnerText == "Investment management").NextSibling.NextSibling.InnerText),
-                            CharitableActivities = GetAndProcessString(() =>spendingTable.First(x => x.InnerText == "Charitable activities").NextSibling.NextSibling.InnerText),
-                            Other = GetAndProcessString(() =>spendingTable.First(x => x.InnerText == "Other").NextSibling.NextSibling.InnerText),
-                            Total = GetAndProcessString(() =>spendingTable.First(x => x.InnerText == "Total").NextSibling.NextSibling.InnerText),
+                            GeneratingVoluntaryIncome = GetAndProcessString(() => spendingTable.TableValue("Generating voluntary income")),
+                            Governance = GetAndProcessString(() => spendingTable.TableValue("Governance")),
+                            TradingToRaiseFunds = GetAndProcessString(() => spendingTable.TableValue("Trading to raise funds")),
+                            InvestmentManagement = GetAndProcessString(() => spendingTable.TableValue("Investment management")),
+                            CharitableActivities = GetAndProcessString(() => spendingTable.TableValue("Charitable activities")),
+                            Other = GetAndProcessString(() => spendingTable.TableValue("Other")),
+                            Total = GetAndProcessString(() => spendingTable.TableValue("Total")),
                         },
 
                     AssetsLiabilitiesAndPeople = new AssetsLiabilitiesAndPeople
                         {
-                            OwnUseAssets = GetAndProcessString(() =>assetsLiabilitiesAndPeople.First(x => x.InnerText == "Own use assets").NextSibling.NextSibling.InnerText),
-                            LongTermInvestments = GetAndProcessString(() =>assetsLiabilitiesAndPeople.First(x => x.InnerText == "Long term investments").NextSibling.NextSibling.InnerText),
-                            OtherAssets =GetAndProcessString(() => assetsLiabilitiesAndPeople.First(x => x.InnerText == "Other assets").NextSibling.NextSibling.InnerText),
-                            TotalLiabilities = GetAndProcessString(() =>assetsLiabilitiesAndPeople.First(x => x.InnerText == "Total liabilities").NextSibling.NextSibling.InnerText),
-                            Employees =GetAndProcessString(() => assetsLiabilitiesAndPeople.First(x => x.InnerText == "Employees").NextSibling.NextSibling.InnerText),
-                            Volunteers =GetAndProcessString(() => assetsLiabilitiesAndPeople.First(x => x.InnerText == "Volunteers").NextSibling.NextSibling.InnerText),
+                            OwnUseAssets = GetAndProcessString(() => assetsLiabilitiesAndPeople.TableValue("Own use assets")),
+                            LongTermInvestments = GetAndProcessString(() => assetsLiabilitiesAndPeople.TableValue("Long term investments")),
+                            OtherAssets = GetAndProcessString(() => assetsLiabilitiesAndPeople.TableValue("Other assets")),
+                            TotalLiabilities = GetAndProcessString(() => assetsLiabilitiesAndPeople.TableValue("Total liabilities")),
+                            Employees = GetAndProcessString(() => assetsLiabilitiesAndPeople.TableValue("Employees")),
+                            Volunteers = GetAndProcessString(() => assetsLiabilitiesAndPeople.TableValue("Volunteers")),
                         },
 
                     CharitableSpending = new CharitableSpending
                         {
-                            IncomeGenerationAndGovernance = GetAndProcessString(() =>charitableSpending.First(x => x.InnerText == "Income generation and governance").NextSibling.NextSibling.InnerText),
-                            CharitableSpendingTotal = GetAndProcessString(() => charitableSpending.First(x => x.InnerText == "Charitable spending").NextSibling.NextSibling.InnerText),
+                            IncomeGenerationAndGovernance = GetAndProcessString(() => charitableSpending.TableValue("Income generation and governance")),
+                            CharitableSpendingTotal = GetAndProcessString(() => charitableSpending.TableValue("Charitable spending")),
                         }
                 };
         }
@@ -139,6 +139,14 @@ namespace CharityHack2012.Code.Adapters
             {
                 return string.Empty;
             }
+        }
+    }
+
+    public static class Extensions
+    {
+        public static string TableValue(this IEnumerable<HtmlNode> nodes, string key)
+        {
+            return nodes.First(x => x.InnerText == key).NextSibling.NextSibling.InnerText;
         }
     }
 }
