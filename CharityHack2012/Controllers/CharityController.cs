@@ -28,13 +28,11 @@ namespace CharityHack2012.Controllers
 
         public ActionResult Index(string id)
         {
-            CharitySearchResult thisCharity;
-            var charityProfile = LoadCharityProfile(id, out thisCharity);
+            var charityProfile = LoadCharityProfile(id);
 
-            if (thisCharity != null)
+            if (charityProfile.JgCharityData != null)
             {
-                charityProfile.RelatedCharities = _jgClient.Search.CharitySearch(thisCharity.Name) ??
-                                                  new CharitySearchResults();
+                charityProfile.RelatedCharities = _jgClient.Search.CharitySearch(charityProfile.JgCharityData.Name) ?? new CharitySearchResults();
             }
             else
             {
@@ -46,14 +44,20 @@ namespace CharityHack2012.Controllers
 
         public ActionResult Compare(string charityId1, string charityId2)
         {
-            return null;
+            var charity1 = LoadCharityProfile(charityId1);
+            var charity2 = LoadCharityProfile(charityId2);
+            var list = new List<CharityProfile> {charity1, charity2};
+
+            return View(list);
         }
 
-        private CharityProfile LoadCharityProfile(string id, out CharitySearchResult thisCharity)
+        private CharityProfile LoadCharityProfile(string id)
         {
             var charityProfile = _charityComissionAdapter.LoadByRegNo(id);
 
             var vaguelyMatchingCharities = _jgClient.Search.CharitySearch(id);
+            var thisCharity = vaguelyMatchingCharities.Results.FirstOrDefault(
+                x => x.RegistrationNumber.Contains(id) && charityProfile.CharityName.Contains(x.Name.ToLower()));
 
             thisCharity = vaguelyMatchingCharities.Results.FirstOrDefault(x => x.RegistrationNumber.Contains(id));
             if (CharityFoundOnJustGiving(thisCharity))
