@@ -1,8 +1,19 @@
-﻿<article>
+﻿@model List<CharityHack2012.Controllers.CharitySearchResult>
+<article>
     <div id="search">
+        @using(Html.BeginForm("Search", "Home")){
         <h2>Seach for charity or cause</h2>
-        <input type="text" placeholder="">
-        <input type="button" value="Search">
+        <input type="text" name="query" placeholder="">
+        <input type="submit" value="Search">
+        }
+    </div>
+        
+    <div id="searchResults">
+        <h3>Search results</h3>       
+        @foreach(var match in Model)
+        {
+            @Html.ActionLink(match.CharityDisplayName, "Index", "Charity", new {id = match.CharityRegistrationNumber}, new {}); @: <br/>
+        }
     </div>
 
     <div id="popular">
@@ -12,7 +23,9 @@
             <li>-link_to -charity.name, -charity.link</li>
         </ul>
     </div>
-    @Html.ActionLink("Cancer research uk", "Index", "Charity", new { id = 1089464 }, new {  })
+    <div>
+        @Html.ActionLink("Cancer research uk", "Index", "Charity", new { id = 1089464 }, new {  })
+    </div>
 </article>
 
 <aside id='news'>
