@@ -11,15 +11,68 @@ namespace CharityHack2012.Code.Adapters
         public const string ApiKey = "cb7544ye6y758hp8fks5p4ke";
         public const int PageSize = 50;
 
-        public GuardianEnvelope SearchContentByCharityName(string charityName)
+        private readonly IRestClient _restClient;
+
+
+        public GuardianApiAdapter()
         {
-            return SearchContentOnGuardian(charityName);
+            _restClient = new RestClient("http://content.guardianapis.com");
         }
 
-        private static GuardianEnvelope SearchContentOnGuardian(string searchTerm)
+        public GuardianEnvelope SearchContentByCharityName(string charityName)
         {
-            var restClient = new RestClient("http://content.guardianapis.com");
-            var monthsAgo = DateTime.Now.MonthsAgo();
+            return TryCustomSearchOrDefault(SearchContentOnGuardian(charityName));
+        }
+
+        private GuardianEnvelope TryCustomSearchOrDefault(GuardianEnvelope customSearch)
+        {
+            return NoResultsFound(customSearch) ? TopHeadlinesInTheCharitiesSector() : customSearch;
+        }
+
+        private static bool NoResultsFound(GuardianEnvelope result)
+        {
+            return result.Response.Results == null || result.Response.Results.Count == 0;
+        }
+
+        public GuardianEnvelope SearchContentByCharityNameAndKeywords(CharityEntity charity)
+        {
+            var searchTerms = SearchTermForCharity(charity);
+            return TryCustomSearchOrDefault(SearchContentOnGuardian(searchTerms.ToString()));
+        }
+
+        private static StringBuilder SearchTermForCharity(CharityEntity charity)
+        {
+            if (charity.Keywords == null)
+            {
+                charity.Keywords = "";
+            }
+            var searchTerms = new StringBuilder();
+            searchTerms.Append(charity.Name);
+            foreach (var keyword in charity.Keywords.Split(','))
+            {
+                searchTerms.Append(" " + keyword);
+            }
+            return searchTerms;
+        }
+
+        private GuardianEnvelope TopHeadlinesInTheCharitiesSector()
+        {
+            var lastWeekStart = 1.WeeksAgoStart();
+            var lastWeekEnd = lastWeekStart.AddDays(6);
+            var request =
+                new RestRequest(
+                    "/society/charities?page-size={pageSize}&from-date={fromDate}&to-date={toDate}&format=json&show-fields=all&api-key={apiKey}",
+                    Method.GET);
+            request.AddUrlSegment("fromDate", lastWeekStart.ToString("yyyy-MM-dd"));
+            request.AddUrlSegment("toDate", lastWeekEnd.ToString("yyyy-MM-dd"));
+            request.AddUrlSegment("pageSize", "5");
+            request.AddUrlSegment("apiKey", "cb7544ye6y758hp8fks5p4ke");
+            return _restClient.Execute<GuardianEnvelope>(request).Data;
+        }
+
+        private GuardianEnvelope SearchContentOnGuardian(string searchTerm)
+        {
+            var monthsAgo = 6.MonthsAgo();
             var request =
                 new RestRequest(
                     "search?q={searchTerm}&page-size={pageSize}&from-date={fromDate}&to-date={toDate}&format=json&show-fields=all&api-key={apiKey}&section=society&tag=society/charities",
@@ -29,30 +82,22 @@ namespace CharityHack2012.Code.Adapters
             request.AddUrlSegment("toDate", DateTime.Now.ToString("yyyy-MM-dd"));
             request.AddUrlSegment("pageSize", "50");
             request.AddUrlSegment("apiKey", "cb7544ye6y758hp8fks5p4ke");
-            return restClient.Execute<GuardianEnvelope>(request).Data;
-        }
-
-        public GuardianEnvelope SearchContentByCharityNameAndKeywords(CharityEntity charity)
-        {
-            if (charity.Keywords == null)
-            {
-                charity.Keywords = "";
-            }
-            var searchTerms = new StringBuilder();
-            searchTerms.Append(charity.Name);
-            foreach(var keyword in charity.Keywords.Split(','))
-            {
-                searchTerms.Append(" " + keyword);
-            }
-            return SearchContentOnGuardian(searchTerms.ToString());
+            return _restClient.Execute<GuardianEnvelope>(request).Data;
         }
     }
 
-    public static class DateTimeExtensions
+    public static class IntegerExtensions
     {
-        public static DateTime MonthsAgo(this DateTime date, int numberOfMonths = 6)
+        public static DateTime MonthsAgo(this int number)
         {
-            return date.AddMonths(-1 * numberOfMonths);
+            return DateTime.Now.AddMonths(-1 * number);
+        }
+
+        public static DateTime WeeksAgoStart(this int number)
+        {
+            var todaysDayOfWeek = DateTime.Now.DayOfWeek;
+            var startOfLastWeek = todaysDayOfWeek - DayOfWeek.Sunday + 7;
+            return DateTime.Now.AddDays(-startOfLastWeek);
         }
     }
 
