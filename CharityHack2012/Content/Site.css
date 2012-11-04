@@ -8,6 +8,11 @@
     min-height: 450px;
 }
 
+.winnar {
+    background-color: green;
+    color: white;
+}
+
 .navbar.navbar-top {
   padding-top: 10px;
   padding-bottom: 10px;

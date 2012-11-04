@@ -21,28 +21,28 @@
             <tbody>
                 <tr>
                     <td>Total</td>
-                    <td>£@first.Income.Total</td>
-                    <td>£@second.Income.Total</td>
+                    <td class="@(first.Income.Total > second.Income.Total ? "winnar" : "")">£@first.Income.Total</td>
+                    <td class="@(second.Income.Total > first.Income.Total ? "winnar" : "")">£@second.Income.Total</td>
                 </tr>
                 <tr>
                     <td>Investment gains</td>
-                    <td>£@first.Income.InvestmentGains</td>
-                    <td>£@second.Income.InvestmentGains</td>
+                    <td class="@(first.Income.InvestmentGains > second.Income.InvestmentGains ? "winnar" : "")">£@first.Income.InvestmentGains</td>
+                    <td class="@(second.Income.InvestmentGains > first.Income.InvestmentGains ? "winnar" : "")">£@second.Income.InvestmentGains</td>
                 </tr>
                 <tr>
                     <td>Trading to raise funds</td>
-                    <td>£@first.Income.TradingToRaiseFunds</td>
-                    <td>£@second.Income.TradingToRaiseFunds</td>
+                    <td class="@(first.Income.TradingToRaiseFunds > second.Income.TradingToRaiseFunds ? "winnar" : "")">£@first.Income.TradingToRaiseFunds</td>
+                    <td class="@(second.Income.TradingToRaiseFunds > first.Income.TradingToRaiseFunds ? "winnar" : "")">£@second.Income.TradingToRaiseFunds</td>
                 </tr>
                 <tr>
                     <td>Voluntary</td>
-                    <td>£@first.Income.Voluntary</td>
-                    <td>£@second.Income.Voluntary</td>
+                    <td class="@(first.Income.Voluntary > second.Income.Voluntary ? "winnar" : "")">£@first.Income.Voluntary</td>
+                    <td class="@(second.Income.Voluntary > first.Income.Voluntary ? "winnar" : "")">£@second.Income.Voluntary</td>
                 </tr>
                 <tr>
                     <td>Other</td>
-                    <td>£@first.Income.Other</td>
-                    <td>£@second.Income.Other</td>
+                    <td class="@(first.Income.Total > second.Income.Other ? "winnar" : "")">£@first.Income.Other</td>
+                    <td class="@(second.Income.Total > first.Income.Other ? "winnar" : "")">£@second.Income.Other</td>
                 </tr>
             </tbody>
         </table>
@@ -65,23 +65,23 @@
             <tbody>
                 <tr>
                     <td>Total</td>
-                    <td>£@first.Expenditure.Total</td>
-                    <td>£@second.Expenditure.Total</td>
+                    <td class="@(first.Expenditure.Total > second.Expenditure.Total ? "winnar" : "")">£@first.Expenditure.Total</td>
+                    <td class="@(second.Expenditure.Total > first.Expenditure.Total ? "winnar" : "")">£@second.Expenditure.Total</td>
                 </tr>
                 <tr>
                     <td>Charitable activities</td>
-                    <td>£@first.Expenditure.CharitableActivities</td>
-                    <td>£@second.Expenditure.CharitableActivities</td>
+                    <td class="@(first.Expenditure.CharitableActivities > second.Expenditure.CharitableActivities ? "winnar" : "")">£@first.Expenditure.CharitableActivities</td>
+                    <td class="@(second.Expenditure.CharitableActivities > first.Expenditure.CharitableActivities ? "winnar" : "")">£@second.Expenditure.CharitableActivities</td>
                 </tr>
                 <tr>
                     <td>Investment management</td>
-                    <td>£@first.Expenditure.InvestmentManagement</td>
-                    <td>£@second.Expenditure.InvestmentManagement</td>
+                    <td class="@(first.Expenditure.InvestmentManagement > second.Expenditure.InvestmentManagement ? "winnar" : "")">£@first.Expenditure.InvestmentManagement</td>
+                    <td class="@(second.Expenditure.InvestmentManagement > first.Expenditure.InvestmentManagement ? "winnar" : "")">£@second.Expenditure.InvestmentManagement</td>
                 </tr>
                 <tr>
                     <td>Spent raising more money</td>
-                    <td>£@first.Expenditure.TradingToRaiseFunds</td>
-                    <td>£@second.Expenditure.TradingToRaiseFunds</td>
+                    <td class="@(first.Expenditure.TradingToRaiseFunds > second.Expenditure.TradingToRaiseFunds ? "winnar" : "")">£@first.Expenditure.TradingToRaiseFunds</td>
+                    <td class="@(second.Expenditure.TradingToRaiseFunds > first.Expenditure.TradingToRaiseFunds ? "winnar" : "")">£@second.Expenditure.TradingToRaiseFunds</td>
                 </tr>
             </tbody>
         </table>
@@ -104,33 +104,33 @@
             <tbody>
                 <tr>
                     <td>Own Use Assets</td>
-                    <td>£@first.AssetsLiabilitiesAndPeople.OwnUseAssets</td>
-                    <td>£@second.AssetsLiabilitiesAndPeople.OwnUseAssets</td>
+                    <td class="@(first.AssetsLiabilitiesAndPeople.OwnUseAssets > second.AssetsLiabilitiesAndPeople.OwnUseAssets ? "winnar" : "")">£@first.AssetsLiabilitiesAndPeople.OwnUseAssets</td>
+                    <td class="@(second.AssetsLiabilitiesAndPeople.OwnUseAssets > first.AssetsLiabilitiesAndPeople.OwnUseAssets ? "winnar" : "")">£@second.AssetsLiabilitiesAndPeople.OwnUseAssets</td>
                 </tr>
                 <tr>
                     <td>Long Term Investments</td>
-                    <td>£@first.AssetsLiabilitiesAndPeople.LongTermInvestments</td>
-                    <td>£@second.AssetsLiabilitiesAndPeople.LongTermInvestments</td>
+                    <td class="@(first.AssetsLiabilitiesAndPeople.LongTermInvestments > second.AssetsLiabilitiesAndPeople.LongTermInvestments ? "winnar" : "")">£@first.AssetsLiabilitiesAndPeople.LongTermInvestments</td>
+                    <td class="@(second.AssetsLiabilitiesAndPeople.LongTermInvestments > first.AssetsLiabilitiesAndPeople.LongTermInvestments ? "winnar" : "")">£@second.AssetsLiabilitiesAndPeople.LongTermInvestments</td>
                 </tr>
                 <tr>
                     <td>Other Assets</td>
-                    <td>£@first.AssetsLiabilitiesAndPeople.OtherAssets</td>
-                    <td>£@second.AssetsLiabilitiesAndPeople.OtherAssets</td>
+                    <td class="@(first.AssetsLiabilitiesAndPeople.OtherAssets > second.AssetsLiabilitiesAndPeople.OtherAssets ? "winnar" : "")">£@first.AssetsLiabilitiesAndPeople.OtherAssets</td>
+                    <td class="@(second.AssetsLiabilitiesAndPeople.OtherAssets > first.AssetsLiabilitiesAndPeople.OtherAssets ? "winnar" : "")">£@second.AssetsLiabilitiesAndPeople.OtherAssets</td>
                 </tr>
                 <tr>
                     <td>Total Liabilities</td>
-                    <td>£@first.AssetsLiabilitiesAndPeople.TotalLiabilities</td>
-                    <td>£@second.AssetsLiabilitiesAndPeople.TotalLiabilities</td>
+                    <td class="@(first.AssetsLiabilitiesAndPeople.TotalLiabilities > second.AssetsLiabilitiesAndPeople.TotalLiabilities ? "winnar" : "")">£@first.AssetsLiabilitiesAndPeople.TotalLiabilities</td>
+                    <td class="@(second.AssetsLiabilitiesAndPeople.TotalLiabilities > first.AssetsLiabilitiesAndPeople.TotalLiabilities ? "winnar" : "")">£@second.AssetsLiabilitiesAndPeople.TotalLiabilities</td>
                 </tr>
                 <tr>
                     <td>Employees</td>
-                    <td>@first.AssetsLiabilitiesAndPeople.Employees</td>
-                    <td>@second.AssetsLiabilitiesAndPeople.Employees</td>
+                    <td class="@(first.AssetsLiabilitiesAndPeople.Employees > second.AssetsLiabilitiesAndPeople.Employees ? "winnar" : "")">@first.AssetsLiabilitiesAndPeople.Employees</td>
+                    <td class="@(second.AssetsLiabilitiesAndPeople.Employees > first.AssetsLiabilitiesAndPeople.Employees ? "winnar" : "")">@second.AssetsLiabilitiesAndPeople.Employees</td>
                 </tr>
                 <tr>
                     <td>Volunteers</td>
-                    <td>@first.AssetsLiabilitiesAndPeople.Volunteers</td>
-                    <td>@second.AssetsLiabilitiesAndPeople.Volunteers</td>
+                    <td class="@(first.AssetsLiabilitiesAndPeople.Volunteers > second.AssetsLiabilitiesAndPeople.Volunteers ? "winnar" : "")">@first.AssetsLiabilitiesAndPeople.Volunteers</td>
+                    <td class="@(second.AssetsLiabilitiesAndPeople.Volunteers > first.AssetsLiabilitiesAndPeople.Volunteers ? "winnar" : "")">@second.AssetsLiabilitiesAndPeople.Volunteers</td>
                 </tr>
             </tbody>
         </table>
