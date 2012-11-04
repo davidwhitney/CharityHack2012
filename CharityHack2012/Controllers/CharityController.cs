@@ -59,6 +59,11 @@ namespace CharityHack2012.Controllers
             var thisCharity = vaguelyMatchingCharities.Results.FirstOrDefault(
                 x => x.RegistrationNumber.Contains(id) && charityProfile.CharityName.Contains(x.Name.ToLower()));
 
+            if (thisCharity != null)
+            {
+                thisCharity.RegistrationNumber = thisCharity.RegistrationNumber.FixRegistrationNumber();
+            }
+
             if (CharityFoundOnJustGiving(thisCharity))
             {
                 PopulateDataFromJustGiving(charityProfile, thisCharity);
