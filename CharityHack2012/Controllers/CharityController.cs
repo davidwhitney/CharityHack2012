@@ -30,10 +30,18 @@ namespace CharityHack2012.Controllers
                 vaguelyMatchingCharities.Results.FirstOrDefault(
                     x => x.RegistrationNumber.Contains(id) && charityProfile.CharityName.Contains(x.Name.ToLower()));
 
-            charityProfile.JgCharityData = thisCharity;
+            charityProfile.JgCharityData = thisCharity ?? new CharitySearchResult();
             charityProfile.CharityImage = "http://v3-sandbox.justgiving.com" + (thisCharity == null ? "" : thisCharity.LogoFileName);
 
-            charityProfile.RelatedCharities = _jgClient.Search.CharitySearch(thisCharity.Name) ?? new CharitySearchResults();
+            if (thisCharity != null)
+            {
+                charityProfile.RelatedCharities = _jgClient.Search.CharitySearch(thisCharity.Name) ??
+                                                  new CharitySearchResults();
+            }
+            else
+            {
+                charityProfile.RelatedCharities = new CharitySearchResults {Results = new CharitySearchResult[0]};
+            }
 
             return View(charityProfile);
         }
