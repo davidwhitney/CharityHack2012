@@ -3,8 +3,9 @@
     ViewBag.Title = Model.First().CharityName + " vs. " + Model.Skip(1).First().CharityName;
 }
 
-<div class="hero-unit" style="background-image: url(/Content/img/hero.png);">
-    <h1 style="padding-bottom: 30px;">Comparison</h1>
+<div class="hero-unit versus">
+    <h1>Comparison</h1>
+    <br>
     <p>
          @Model.First().CharityName<br/>
         vs.<br/>

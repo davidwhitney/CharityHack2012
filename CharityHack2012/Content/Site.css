@@ -133,6 +133,10 @@ footer {
   background-size: 100%;
 }
 
+.versus {
+  background-image: url(/Content/img/versus.jpg);
+}
+
 .hero-unit h1 {
   line-height: 160%;
   margin-bottom: 30px;
