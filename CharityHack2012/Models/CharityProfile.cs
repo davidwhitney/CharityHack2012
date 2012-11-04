@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using CharityHack2012.Code;
 using CharityHack2012.Code.Adapters;
+using JustGiving.Api.Sdk.Model.Charity;
 
 namespace CharityHack2012.Models
 {
@@ -19,7 +21,7 @@ namespace CharityHack2012.Models
         public List<string> TrusteeNames { get; set; }
         public List<Item> NewsItems { get; set; }
 
-        public JustGiving.Api.Sdk.Model.Search.CharitySearchResult JgCharityData { get; set; }
+        public CharityEntity JgCharityData { get; set; }
 
         public bool HasJgData
         {

@@ -125,6 +125,7 @@ namespace CharityHack2012.Code.Adapters
                 @string = @string.Trim();
                 @string = @string.Replace("&nbsp;-&nbsp;", "");
                 @string = @string.Replace("&nbsp;", "");
+                @string = @string.Replace("&amp;", "&");
                 return @string.ToLower();
             }
             catch

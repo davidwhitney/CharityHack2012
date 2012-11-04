@@ -83,6 +83,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -209,6 +210,7 @@
     <Compile Include="Code\Adapters\GuardianApiAdapter.cs" />
     <Compile Include="Code\Http\HttpContentGetter.cs" />
     <Compile Include="Code\Http\IHttpContentGetter.cs" />
+    <Compile Include="Code\JGCharitySearch.cs" />
     <Compile Include="Controllers\CharityController.cs" />
     <Compile Include="CassetteConfiguration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
