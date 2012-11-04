@@ -55,7 +55,13 @@ namespace CharityHack2012.Code.Adapters
             var assetsLiabilitiesAndPeople = GetById(generalDataDoc, "TablesAssetsLiabilitiesAndPeople"); 
             var charitableSpending = GetById(generalDataDoc, "TablesCharitableSpending");
 
-            var trusteeNodes = trusteeDataDoc.DocumentNode.Descendants().Where(x => x.Name == "a" && x.Id.Contains("ctl00_MainContent_") && !x.InnerText.Contains("#99")).ToList();
+            var trusteeNodes =
+                trusteeDataDoc.DocumentNode.Descendants().Where(
+                    x => x.Name == "a" 
+                            && x.Id.Contains("ctl00_MainContent_") 
+                            && !x.InnerText.Contains("#99") 
+                            && !x.InnerText.Contains("www."))
+                    .ToList();
             var trusteeNames = trusteeNodes.Select(trustee => GetAndProcessString(()=>trustee.InnerText)).Where(x=>!string.IsNullOrWhiteSpace(x)).ToList();
 
             return new CharityProfile
