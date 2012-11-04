@@ -232,6 +232,7 @@
     <Content Include="Content\img\hero.jpg" />
     <Content Include="Content\img\hero.png" />
     <Content Include="Content\img\logo-small.png" />
+    <Content Include="Content\img\versus.jpg" />
     <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
