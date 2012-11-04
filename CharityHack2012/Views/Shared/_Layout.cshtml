@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>@ViewBag.Title</title>
+    <title>@ViewBag.Title - Charity Supermarket</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -34,10 +34,19 @@
                     <span class="icon-bar"></span>
                 </a>
                 <a class="brand" href="@Url.Action("Index", "Home")">CharitySupermarket</a>
-                <div class="nav-collapse collapse">
-                    <ul class="nav">
-                    </ul>
+                
+
+                <div class="pull-right">
+                   
+                    @using(Html.BeginForm("Search", "Home")){
+                            
+                        <div class="input-append">
+                            <input class="span2" name="query" id="appendedInputButton" type="text">
+                            <button class="btn" type="button">Search</button>
+                        </div>
+                    }
                 </div>
+
                 <!--/.nav-collapse -->
             </div>
         </div>
@@ -45,6 +54,17 @@
 
     <div class="container reasonably-high">
         
+        <div class="row">
+            <div class="span10">
+                <div class="pull-right">
+                <div style="float:left;"><a class="socialite twitter-share" href="http://twitter.com/share" data-url="">Share on Twitter</a></div>
+                <div style="float:left;"><a class="socialite googleplus-one" data-url="">+1</a></div>
+                <div style="float:left; width: 150px; overflow: hidden"><a class="socialite facebook-like" data-url="">Like on Facebook</a></div>
+                </div>
+                
+            </div>
+        </div>
+
         @RenderSection("featured", required: false)
 
         @RenderBody()
@@ -61,6 +81,13 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    
+    <script src="~/Scripts/socialite.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function() {
+            Socialite.load();
+        });
+    </script>
 
 </body>
 </html>

@@ -25,10 +25,9 @@ namespace CharityHack2012.Test.Unit.Code.Adapters
         [Test]
         public void CharityComissionUriForRegistrationNumber_WhenProvidedWithARegNo_GeneratesAppropriateUrl()
         {
-
             var uri = _adapter.CharityComissionUriForRegistrationNumber(RegNo);
 
-            Assert.That(uri, Is.EqualTo(_adapter.CharityComissionBaseUri + _adapter.TrusteesPart + RegNo));
+            Assert.That(uri, Is.EqualTo(_adapter.CharityComissionBaseUri + _adapter.GeneralInfoPart + RegNo));
         }
 
         [Test]

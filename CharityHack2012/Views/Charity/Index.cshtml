@@ -1,10 +1,11 @@
 ﻿@model CharityHack2012.Models.CharityProfile
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = Model.CharityName;
 }
 
 <div class="row">
-    <div class="span12">
+    <a id="summary"></a>
+    <div class="span10">
 
         <div id='info'>
             <h1>@Model.CharityName</h1>
@@ -17,15 +18,46 @@
         <div id="actions">
             <a href="http://www.justgiving.com/donation/direct/charity/@Model.JgCharityData.Id">Donate</a>
         </div>
-        
     </div>
 </div>
 
 <div class="row">
-    <div class="span12">
+    <div class="span1" style="overflow: hidden;">
+        Trustees
+    </div>
+    <div class="span9" style="overflow: hidden;">
+        @foreach(var trustee in Model.TrusteeNames){
+            @: <span class="label">@trustee</span>
+        }
+    </div>
+</div>
+
+<hr/>
+
+<div class="row">
+    <div class="span10">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <ul class="nav">
+                    <li class="active"><a href="#summary" class="navbar-link">Summary</a></li>
+                    <li><a href="#finances" class="navbar-link">Financial information</a></li>
+                    <li><a href="#inthenews" class="navbar-link">In the news</a></li>
+                    <li><a href="#similarcharities" class="navbar-link">Similar charities</a></li>
+                    <li><a href="#discussion" class="navbar-link">Discussion</a></li>
+                </ul>
+            </div>
+        </div>        
+    </div>
+</div>
+
+<hr/>
+
+<div class="row">
+    <div class="span10">
+        <a id="finances"></a>
 
         <div id="monies" class="row">
-            
+            <h2>Finances</h2>
             <div class="span3">
                 <h2>Income</h2>
                 <ul>
@@ -61,18 +93,64 @@
             </div>
 
         </div>
+        
+        <hr/>
 
-        <div>
-            @foreach(var newsItem in Model.NewsItems)
-            {
+        <div class="row">
+            <a id="inthenews"></a>
+            <a id="similarcharities"></a>
+            <div class="span5">
+                <h2>In the news...</h2>
+                @foreach(var newsItem in Model.NewsItems)
+                {
+                    <div>
+                        <a href="@newsItem.WebUrl">@newsItem.WebTitle</a><p />
+                        @{
+                            var publicationDate = Convert.ToDateTime(newsItem.WebPublicationDate);
+                        }
+                        @publicationDate.ToString("dd MMM yyyy HH:mm")
+                    </div>    
+                }
+            </div>
+            
+            <div class="span5">
+                <h2>Similar charities</h2>
                 <div>
-                    <a href="@newsItem.WebUrl">@newsItem.WebTitle</a><p />
-                    @{
-                        var publicationDate = Convert.ToDateTime(newsItem.WebPublicationDate);
+                    @foreach(var related in Model.RelatedCharities.Results.Where(x=>x.Name.ToLower() != Model.CharityName.ToLower()).Take(10))
+                    {
+                        @: <div class="related">
+                               @Html.ActionLink(related.Name, "Index", "Charity", new { id = related.RegistrationNumber }, new{})
+                        @:   </div>
                     }
-                    @publicationDate.ToString("dd MMM yyyy HH:mm")
-                </div>    
-            }
+                </div>
+            </div>
+        </div>
+        
+        <hr/>
+        
+        <div class="row">
+            
+            <a id="discussion"></a>
+            <h2>Discuss this charity</h2>
+
+            <div class="span10">
+                
+                <div id="disqus_thread"></div>
+                <script type="text/javascript">
+                    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                    var disqus_shortname = 'charitysupermarketalpha'; // required: replace example with your forum shortname
+
+                    /* * * DON'T EDIT BELOW THIS LINE * * */
+                    (function() {
+                        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                    })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        
+            </div>
         </div>
     </div>
     
@@ -82,3 +160,11 @@
 <div id="chartdiv" style="height:400px;width:300px; "></div>
 
 <script type="text/javascript" src="/Scripts/renderCharityChart.js"></script>
+
+<script type="text/javascript">
+
+    $('.navbar-link').click(function () {
+        $('.navbar-link').parent().removeClass('active');
+        $(this).parent().addClass('active');
+    });
+</script>

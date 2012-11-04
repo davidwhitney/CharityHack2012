@@ -7,7 +7,9 @@ using CharityHack2012.Code.Adapters;
 using CharityHack2012.Models;
 using JustGiving.Api.Sdk;
 using System.Linq;
+using JustGiving.Api.Sdk.Model.Search;
 using CharitySearchResult = JustGiving.Api.Sdk.Model.Search.CharitySearchResult;
+
 
 namespace CharityHack2012.Controllers
 {
@@ -26,11 +28,34 @@ namespace CharityHack2012.Controllers
 
         public ActionResult Index(string id)
         {
+            CharitySearchResult thisCharity;
+            var charityProfile = LoadCharityProfile(id, out thisCharity);
+
+            if (thisCharity != null)
+            {
+                charityProfile.RelatedCharities = _jgClient.Search.CharitySearch(thisCharity.Name) ??
+                                                  new CharitySearchResults();
+            }
+            else
+            {
+                charityProfile.RelatedCharities = new CharitySearchResults {Results = new CharitySearchResult[0]};
+            }
+
+            return View(charityProfile);
+        }
+
+        public ActionResult Compare(string charityId1, string charityId2)
+        {
+            return null;
+        }
+
+        private CharityProfile LoadCharityProfile(string id, out CharitySearchResult thisCharity)
+        {
             var charityProfile = _charityComissionAdapter.LoadByRegNo(id);
 
             var vaguelyMatchingCharities = _jgClient.Search.CharitySearch(id);
 
-            var thisCharity = vaguelyMatchingCharities.Results.FirstOrDefault(x => x.RegistrationNumber.Contains(id));
+            thisCharity = vaguelyMatchingCharities.Results.FirstOrDefault(x => x.RegistrationNumber.Contains(id));
             if (CharityFoundOnJustGiving(thisCharity))
             {
                 PopulateDataFromJustGiving(charityProfile, thisCharity);
@@ -39,7 +64,8 @@ namespace CharityHack2012.Controllers
             {
                 SetupDefaultDataForCharity(charityProfile);
             }
-            return View(charityProfile);
+
+            return charityProfile;
         }
 
         private void SetupDefaultDataForCharity(CharityProfile charityProfile)
