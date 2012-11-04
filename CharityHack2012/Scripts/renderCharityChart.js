@@ -1,6 +1,22 @@
 (function($) {
     $(document).ready(function () {
-        var r = Raphael(10, 50, 640, 480);
-        r.g.pieChart(320, 240, 100, [55, 20, 13, 32, 5, 1, 2]);
+        var data = [
+          ['Heavy Industry', 12], ['Retail', 9], ['Light Industry', 14],
+          ['Out of home', 16], ['Commuting', 7], ['Orientation', 9]
+        ];
+        var plot1 = jQuery.jqplot('chart1', [data],
+          {
+              seriesDefaults: {
+                  // Make this a pie chart.
+                  renderer: jQuery.jqplot.PieRenderer,
+                  rendererOptions: {
+                      // Put data labels on the pie slices.
+                      // By default, labels show the percentage of the slice.
+                      showDataLabels: true
+                  }
+              },
+              legend: { show: true, location: 'e' }
+          }
+        );
     });
 }(jQuery));

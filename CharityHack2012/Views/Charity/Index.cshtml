@@ -121,15 +121,15 @@
     
 </div>
 
-<div id="chart1"></div>
-<div id="chartdiv" style="height:400px;width:300px; "></div>
+@section scripts
+{
+    @Scripts.Render("~/bundles/jquery.jqplot")
+    <script type="text/javascript" src="/Scripts/renderCharityChart.js"></script>
+    <script type="text/javascript">
 
-<script type="text/javascript" src="/Scripts/renderCharityChart.js"></script>
-
-<script type="text/javascript">
-
-    $('.navbar-link').click(function () {
-        $('.navbar-link').parent().removeClass('active');
-        $(this).parent().addClass('active');
-    });
-</script>
+        $('.navbar-link').click(function () {
+            $('.navbar-link').parent().removeClass('active');
+            $(this).parent().addClass('active');
+        });
+    </script>
+}
