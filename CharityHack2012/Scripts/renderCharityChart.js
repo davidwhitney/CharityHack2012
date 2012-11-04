@@ -1,10 +1,17 @@
 (function($) {
     $(document).ready(function () {
+        debugger;
+        var investmentGains = $("#income").find("[data-investment-gains]").data('investment-gains');
+        var investments = $("#income").find("[data-investments]").data('investments');
+        var tradingFunds = $("#income").find("[data-trading-funds]").data('trading-funds');
+        var voluantaryIncome = $("#income").find("[data-voluantary-income]").data('trading-funds');
+        var incomeOther = $("#income").find("[data-income-other]").data('income-other');
+
         var data = [
-          ['Heavy Industry', 12], ['Retail', 9], ['Light Industry', 14],
-          ['Out of home', 16], ['Commuting', 7], ['Orientation', 9]
+          ['Investments', investments], ['Investment Gains', investmentGains], ['Trading Funds', tradingFunds],
+          ['Voluantary Income', voluantaryIncome], ['Other Income', incomeOther]
         ];
-        var plot1 = jQuery.jqplot('chart1', [data],
+        jQuery.jqplot('chartdiv', [data],
           {
               seriesDefaults: {
                   // Make this a pie chart.
@@ -13,10 +20,12 @@
                       // Put data labels on the pie slices.
                       // By default, labels show the percentage of the slice.
                       showDataLabels: true
-                  }
+                  },
               },
               legend: { show: true, location: 'e' }
           }
         );
+
+        $('#income-chart .modal-body').append($('#chartdiv'));
     });
 }(jQuery));
