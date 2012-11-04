@@ -4,6 +4,10 @@
   color: #3c3c3c; 
 }
 
+.reasonably-high {
+    min-height: 450px;
+}
+
 .navbar.navbar-top {
   padding-top: 10px;
   padding-bottom: 10px;

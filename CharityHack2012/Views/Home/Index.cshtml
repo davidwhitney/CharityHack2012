@@ -8,6 +8,7 @@
         }
     </div>
         
+    @if(Model.Count > 0){
     <div id="searchResults">
         <h3>Search results</h3>       
         @foreach(var match in Model)
@@ -15,23 +16,14 @@
             @Html.ActionLink(match.CharityDisplayName, "Index", "Charity", new {id = match.CharityRegistrationNumber}, new {}); @: <br/>
         }
     </div>
+    }
 
-    <div id="popular">
-        <h2>Popular charities</h2>
-        <ul>
-            <li>@Html.ActionLink("Cancer research uk", "Index", "Charity", new { id = 1089464 }, new {  })</li>
-        </ul>
-    </div>
 </article>
 
 <aside id='news'>
-    <h2>Latest news</h2>
+    <h2>Popular charities</h2>
     <ul>
-        <!-- News.limit(10).each do |-news| -->
-        <li>
-            <h3>-news.title</h3>
-            <p>-news.summary</p>
-            <p class="link">-link_to -news.charity_name,-news.link</p>
-        </li>
+        <li>@Html.ActionLink("Cancer Research UK", "Index", "Charity", new { id = 1089464 }, new {  })</li>
+        <li>@Html.ActionLink("Against Breast Cancer Ltd", "Index", "Charity", new { id = 1121258 }, new {  })</li>
     </ul>
 </aside>
