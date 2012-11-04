@@ -1,6 +1,5 @@
 (function($) {
     $(document).ready(function () {
-        debugger;
         var investmentGains = $("#income").find("[data-investment-gains]").data('investment-gains');
         var investments = $("#income").find("[data-investments]").data('investments');
         var tradingFunds = $("#income").find("[data-trading-funds]").data('trading-funds');
