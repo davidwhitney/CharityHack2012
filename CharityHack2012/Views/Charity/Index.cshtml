@@ -6,7 +6,10 @@
 
 <div id='info'>
   <h1>@Model.CharityName</h1>
-  <p><img src='@Model.CharityImage'>@Model.CharitySummary</p>
+    <p>
+        <img src='@Model.CharityImage'>
+        @Model.JgCharityData.Description
+    </p>
 </div>
 
 <div id="actions">
