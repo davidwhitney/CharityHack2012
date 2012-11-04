@@ -1,6 +1,30 @@
 (function($) {
     $(document).ready(function () {
-        var r = Raphael(10, 50, 640, 480);
-        r.g.pieChart(320, 240, 100, [55, 20, 13, 32, 5, 1, 2]);
+        var investmentGains = $("#income").find("[data-investment-gains]").data('investment-gains');
+        var investments = $("#income").find("[data-investments]").data('investments');
+        var tradingFunds = $("#income").find("[data-trading-funds]").data('trading-funds');
+        var voluantaryIncome = $("#income").find("[data-voluantary-income]").data('trading-funds');
+        var incomeOther = $("#income").find("[data-income-other]").data('income-other');
+
+        var data = [
+          ['Investments', investments], ['Investment Gains', investmentGains], ['Trading Funds', tradingFunds],
+          ['Voluantary Income', voluantaryIncome], ['Other Income', incomeOther]
+        ];
+        jQuery.jqplot('chartdiv', [data],
+          {
+              seriesDefaults: {
+                  // Make this a pie chart.
+                  renderer: jQuery.jqplot.PieRenderer,
+                  rendererOptions: {
+                      // Put data labels on the pie slices.
+                      // By default, labels show the percentage of the slice.
+                      showDataLabels: true
+                  },
+              },
+              legend: { show: true, location: 'e' }
+          }
+        );
+
+        $('#income-chart .modal-body').append($('#chartdiv'));
     });
 }(jQuery));

@@ -1,18 +1,35 @@
 ﻿@model CharityHack2012.Models.CharityProfile
 
-        <div id="monies" class="row">
-            <h2>Finances</h2>
-            <div class="span3">
-                <h2>Income</h2>
-                <ul>
-                    <li data-total-income="@Model.Income.Total"><strong>Total:</strong> £@Model.Income.Total</li>
-                    <li data-investment-gains="@Model.Income.InvestmentGains"><strong>Investment gains:</strong> £@Model.Income.InvestmentGains</li>
-                    <li data-investments="@Model.Income.InvestmentGains"><strong>Investment:</strong> £@Model.Income.Investment</li>
-                    <li><strong>Trading to raise funds:</strong> £@Model.Income.TradingToRaiseFunds</li>
-                    <li><strong>Voluntary:</strong> £@Model.Income.Voluntary</li>
-                    <li><strong>Other:</strong> £@Model.Income.Other</li>
-                </ul>
-            </div>
+<div id="monies" class="row">
+    <h2>Finances</h2>
+    <div class="span3">
+        <h2>Income</h2>
+        <ul id="income">
+            <li data-total-income="@Model.Income.Total"><strong>Total:</strong> @Model.Income.Total</li>
+            <li data-investment-gains="@Model.Income.InvestmentGains"><strong>Investment gains:</strong>£@Model.Income.InvestmentGains</li>
+            <li data-investments="@Model.Income.InvestmentGains"><strong>Investment:</strong>£@Model.Income.Investment</li>
+            <li data-trading-funds="@Model.Income.TradingToRaiseFunds"><strong>Trading to raise funds:</strong>£@Model.Income.TradingToRaiseFunds</li>
+            <li data-voluantary-income="@Model.Income.Voluntary"><strong>Voluntary:</strong>£@Model.Income.Voluntary</li>
+            <li data-income-other="@Model.Income.Other"><strong>Other:</strong>£@Model.Income.Other</li>
+            <li><a href="#income-chart" role="button" class="btn" data-toggle="modal">Chart</a></li>
+        </ul>
+    </div>
+    
+    <div id="chartdiv"  style="height:400px;width:300px; "></div>
+    
+    <div id="income-chart" class="modal hide fade">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>Income</h3>
+        </div>
+        <div class="modal-body">
+            
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn" data-dismiss="modal">Close</a>
+        </div>
+    </div>
+
 
     <div class="span3">
         <h2>Expenses</h2>
@@ -35,7 +52,6 @@
             <li><strong>Volunteers:</strong> @Model.AssetsLiabilitiesAndPeople.Volunteers</li>
         </ul>
     </div>
-
 </div>
 
 <div id="row" style="padding-top: 30px;">
