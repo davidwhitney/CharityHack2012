@@ -55,8 +55,8 @@ namespace CharityHack2012.Code.Adapters
             var assetsLiabilitiesAndPeople = GetById(generalDataDoc, "TablesAssetsLiabilitiesAndPeople"); 
             var charitableSpending = GetById(generalDataDoc, "TablesCharitableSpending");
 
-            var trusteeNodes = trusteeDataDoc.DocumentNode.Descendants().Where(x => x.Name == "a" && x.Id.Contains("ctl00_MainContent_")).ToList();
-            var trusteeNames = trusteeNodes.Select(trustee => trustee.InnerText).ToList();
+            var trusteeNodes = trusteeDataDoc.DocumentNode.Descendants().Where(x => x.Name == "a" && x.Id.Contains("ctl00_MainContent_") && !x.InnerText.Contains("#99")).ToList();
+            var trusteeNames = trusteeNodes.Select(trustee => GetAndProcessString(()=>trustee.InnerText)).Where(x=>!string.IsNullOrWhiteSpace(x)).ToList();
 
             return new CharityProfile
                 {
@@ -122,9 +122,11 @@ namespace CharityHack2012.Code.Adapters
             try
             {
                 var @string = getString();
-                @string = @string.Trim();
+                @string = @string.Replace("\n", "");
+                @string = @string.Replace("\r", "");
                 @string = @string.Replace("&nbsp;-&nbsp;", "");
                 @string = @string.Replace("&nbsp;", "");
+                @string = @string.Trim();
                 return @string.ToLower();
             }
             catch
