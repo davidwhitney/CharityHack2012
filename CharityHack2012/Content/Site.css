@@ -16,7 +16,7 @@
 }
 
 .navbar .container {
-  width: 940px;
+  width: 810px;
 }
 
 .navbar.navbar-top .brand {
@@ -126,4 +126,26 @@ footer {
 
 #monies {
   clear: both;
+}
+
+.hero-unit {
+  background-image: url(/Content/img/hero.jpg);
+  background-size: 100%;
+}
+
+.versus {
+  background-image: url(/Content/img/versus.jpg);
+}
+
+.hero-unit h1 {
+  line-height: 160%;
+  margin-bottom: 30px;
+  padding-bottom: 0;
+}
+
+.hero-unit h1,
+.hero-unit p {
+  background-color: rgba(0,0,0,0.6);
+  color: #fff;
+  display: inline;
 }
