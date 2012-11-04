@@ -2,6 +2,7 @@ using System.Web.Mvc;
 using CharityHack2012.Code.Adapters;
 using JustGiving.Api.Sdk;
 using System.Linq;
+using JustGiving.Api.Sdk.Model.Search;
 
 namespace CharityHack2012.Controllers
 {
@@ -30,8 +31,9 @@ namespace CharityHack2012.Controllers
                     x => x.RegistrationNumber.Contains(id) && charityProfile.CharityName.Contains(x.Name.ToLower()));
 
             charityProfile.JgCharityData = thisCharity;
-
             charityProfile.CharityImage = "http://v3-sandbox.justgiving.com" + (thisCharity == null ? "" : thisCharity.LogoFileName);
+
+            charityProfile.RelatedCharities = _jgClient.Search.CharitySearch(thisCharity.Name) ?? new CharitySearchResults();
 
             return View(charityProfile);
         }

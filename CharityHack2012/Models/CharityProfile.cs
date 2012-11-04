@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CharityHack2012.Code.Adapters;
+using JustGiving.Api.Sdk.Model.Search;
 
 namespace CharityHack2012.Models
 {
@@ -25,6 +26,8 @@ namespace CharityHack2012.Models
         {
             get { return JgCharityData != null; }
         }
+
+        public CharitySearchResults RelatedCharities { get; set; }
 
         public CharityProfile()
         {
