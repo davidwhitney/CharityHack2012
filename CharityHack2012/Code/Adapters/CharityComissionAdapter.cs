@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using CharityHack2012.Code.Http;
 using CharityHack2012.Models;
 using HtmlAgilityPack;
@@ -59,7 +60,7 @@ namespace CharityHack2012.Code.Adapters
                 trusteeDataDoc.DocumentNode.Descendants().Where(
                     x => x.Name == "a" 
                             && x.Id.Contains("ctl00_MainContent_") 
-                            && !x.InnerText.Contains("#99") 
+                            && !x.InnerText.Contains("#") 
                             && !x.InnerText.Contains("www."))
                     .ToList();
             var trusteeNames = trusteeNodes.Select(trustee => GetAndProcessString(()=>trustee.InnerText)).Where(x=>!string.IsNullOrWhiteSpace(x)).ToList();
@@ -67,7 +68,7 @@ namespace CharityHack2012.Code.Adapters
             var prof = new CharityProfile
                 {
                     CharityName = GetAndProcessString(() => generalDataDoc.GetElementbyId("ctl00_charityStatus_spnCharityName").InnerText),
-                    CharityRegistrationNumber = GetAndProcessString(() => generalDataDoc.GetElementbyId("ctl00_charityStatus_spnCharityNo").InnerText),
+                    CharityRegistrationNumber = GetAndProcessString(() => generalDataDoc.GetElementbyId("ctl00_charityStatus_spnCharityNo").InnerText).FixRegistrationNumber(),
                     MissionStatement = GetAndProcessString(() => generalDataDoc.GetElementbyId("ctl00_MainContent_ucDisplay_ucActivities_ucTextAreaInput_txtTextEntry").InnerText),
                     TrusteeNames = trusteeNames,
 
@@ -109,6 +110,7 @@ namespace CharityHack2012.Code.Adapters
                             CharitableSpendingTotal = GetAndProcessDecimal(() => charitableSpending.TableValue("Charitable spending")),
                         }
                 };
+
 
             return prof;
         }
@@ -171,6 +173,30 @@ namespace CharityHack2012.Code.Adapters
         public static string TableValue(this IEnumerable<HtmlNode> nodes, string key)
         {
             return nodes.First(x => x.InnerText == key).NextSibling.NextSibling.InnerText;
+        }
+
+        public static string FixRegistrationNumber(this string val)
+        {
+            if(string.IsNullOrWhiteSpace(val))
+            {
+                return val;
+            }
+
+            try
+            {
+                var r = new Regex("([0-9]+)");
+                var matches = r.Matches(val);
+                return matches[0].Captures[0].Value;
+            }
+            catch
+            {
+                return "0";
+            }
+        }
+
+        public static bool RegNoIsValid(this string val)
+        {
+            return val != "0";
         }
     }
 }
