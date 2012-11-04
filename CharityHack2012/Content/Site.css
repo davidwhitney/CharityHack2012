@@ -149,3 +149,28 @@ footer {
   color: #fff;
   display: inline;
 }
+
+h2.charity.name {
+  background-color: rgba(0,0,0,0.6);
+  color: #fff;
+  font-size: 140%;
+  padding: 5px;
+  margin-left: -24px;
+  margin-bottom: 0;
+}
+
+.span3 {
+
+}
+
+.span3 h2 {
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  padding: 10px;
+  margin-right: 10px;
+}
+
+.span3 ul {
+  list-style: none;
+  margin-left: 10px;
+}
