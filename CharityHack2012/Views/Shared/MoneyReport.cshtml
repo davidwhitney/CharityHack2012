@@ -50,9 +50,13 @@
         {
             @: <span class="label label-success">Charity raises more money than it spends in a calendar year.</span>
         }
+        @if(Model.Income.Total < Model.Expenditure.Total)
+        {
+            @: <span class="label label-important">Charity spends more than it raises in a calendar year.</span>
+        }
         @if(Model.Income.Voluntary < Model.Expenditure.GeneratingVoluntaryIncome)
         {
-            @: <span class="label label-error">Charity spends more raising voluntary income than they get in return.</span>
+            @: <span class="label label-important">Charity spends more raising voluntary income than they get in return.</span>
         }
         @if(Model.Income.Voluntary > Model.Expenditure.CharitableActivities)
         {
@@ -73,6 +77,10 @@
         @if (Model.AssetsLiabilitiesAndPeople.Employees > 500)
         {
             @: <span class="label label-info">Charity has a lot of employees and is probably run like a large business.</span>
+        }
+        @if (Model.TrusteeNames.Count > Model.AssetsLiabilitiesAndPeople.Employees)
+        {
+            @: <span class="label label-info">Charity has more trustees than employees.</span>
         }
 
     </div>
