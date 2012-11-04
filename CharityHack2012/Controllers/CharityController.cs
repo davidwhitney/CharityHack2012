@@ -31,6 +31,8 @@ namespace CharityHack2012.Controllers
 
             charityProfile.JgCharityData = thisCharity;
 
+            charityProfile.CharityImage = "http://v3-sandbox.justgiving.com" + (thisCharity == null ? "" : thisCharity.LogoFileName);
+
             return View(charityProfile);
         }
     }

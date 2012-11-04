@@ -6,11 +6,14 @@
 
 <div id='info'>
   <h1>@Model.CharityName</h1>
-  <p><img src='@Model.CharityImage'>@Model.CharitySummary</p>
+    <p>
+        <img src='@Model.CharityImage'>
+        @Model.JgCharityData.Description
+    </p>
 </div>
 
 <div id="actions">
-  <a href="">Donate</a>
+  <a href="http://www.justgiving.com/donation/direct/charity/@Model.JgCharityData.CharityId">Donate</a>
 </div>
 
 <div id="monies">

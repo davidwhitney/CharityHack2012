@@ -1,18 +1,27 @@
-﻿<article>
+﻿@model List<CharityHack2012.Models.CharitySearchResult>
+<article>
     <div id="search">
+        @using(Html.BeginForm("Search", "Home")){
         <h2>Seach for charity or cause</h2>
-        <input type="text" placeholder="">
-        <input type="button" value="Search">
+        <input type="text" name="query" placeholder="">
+        <input type="submit" value="Search">
+        }
+    </div>
+        
+    <div id="searchResults">
+        <h3>Search results</h3>       
+        @foreach(var match in Model)
+        {
+            @Html.ActionLink(match.CharityDisplayName, "Index", "Charity", new {id = match.CharityRegistrationNumber}, new {}); @: <br/>
+        }
     </div>
 
     <div id="popular">
         <h2>Popular charities</h2>
-        <!-- Popular.charity.limit(10).each do |-charity| -->
         <ul>
-            <li>-link_to -charity.name, -charity.link</li>
+            <li>@Html.ActionLink("Cancer research uk", "Index", "Charity", new { id = 1089464 }, new {  })</li>
         </ul>
     </div>
-    @Html.ActionLink("Cancer research uk", "Index", "Charity", new { id = 1089464 }, new {  })
 </article>
 
 <aside id='news'>
